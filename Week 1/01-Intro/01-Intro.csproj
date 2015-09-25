@@ -103,9 +103,11 @@
     <Content Include="Web.config" />
     <Content Include="Views\Time\WhatTime.cshtml" />
     <Content Include="Views\ServerVariables\ServerVariables.cshtml" />
+    <Content Include="Views\Contact\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\ContactController.cs" />
     <Compile Include="Controllers\DateController.cs" />
     <Compile Include="Controllers\ServerVariablesController.cs" />
     <Compile Include="Controllers\TimeController.cs" />
@@ -125,6 +127,8 @@
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
+    <Content Include="Views\Contact\Error.cshtml" />
+    <Content Include="Views\Contact\Save.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

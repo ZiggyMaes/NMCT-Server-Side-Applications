@@ -1,0 +1,15 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Contact form</h2>
+<form method="post" action="/contact/save">
+    <label for="title">Title:</label> <br />
+    <input type="text" name="title" /> <br />
+
+    <label for="info">Info: </label><br />
+    <textarea name="info"></textarea><br /><br />   
+
+    <input type="submit" value="Save" name="Save" />
+</form>
