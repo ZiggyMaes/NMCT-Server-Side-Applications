@@ -8,3 +8,9 @@
 <div>
     Welkom, de tijd is @ViewBag.Today
 </div>
+
+<div>
+    <a href="/Time/WhatTime?uur=11&min=23">Terug naar de cshtml van time.</a>
+
+    @Html.ActionLink("Toon de tijd met ActionLink", "WhatTime", "Time", new { uur = 20, min = 55, sec = 32 }, null)
+</div>
