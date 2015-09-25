@@ -1,0 +1,13 @@
+﻿
+@{
+    ViewBag.Title = "ServerVariables";
+}
+
+<h2>ServerVariables</h2>
+
+<ul>
+    @foreach (var sv in ViewBag.Result)
+    {
+        <li>@sv.Key = <b>@sv.Value</b></li>
+    }
+</ul>
