@@ -16,7 +16,7 @@ namespace _01_Intro
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Contact", action = "Index", id = UrlParameter.Optional }
+                defaults: new { controller = "Order", action = "New", id = UrlParameter.Optional }
             );
         }
     }

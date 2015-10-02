@@ -1,0 +1,21 @@
+﻿
+@{
+    ViewBag.Title = "Step2";
+}
+
+<h2>Overzicht bestelling</h2>
+<br />
+<h3>Gegegvens</h3>
+<div>Bedrijf: @ViewBag.Company</div>
+<div>Volledige naam: @ViewBag.FirstName @ViewBag.LastName</div>
+
+<h3>Bestelling</h3>
+<div>Tablet: @ViewBag.Tablet.Name</div>
+
+@* Zal letters onder elkaar oplijsten, dit is uiteraard niet de bedoeling... Array manueel appenden, 
+    laat het nu zo omdat er andere betere manieren zijn en dit niet het doel van de oefening is *@
+<h3>Toebehoren</h3>
+@foreach(var item in ViewBag.Toebehoren) 
+{
+    <div>@item</div>
+}
