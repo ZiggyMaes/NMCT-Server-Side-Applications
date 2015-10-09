@@ -1,0 +1,25 @@
+﻿
+@{
+    ViewBag.Title = "New";
+}
+
+<h2>New</h2>
+
+<form action="/order/next?Step=1" method="post">
+    <label for="firstName">First name</label>
+    <input type="text" name="firstName" />
+
+    <br />
+
+    <label for="lastName">Last Name</label>
+    <input type="text" name="lastName" />
+
+    <br />
+
+    <label for="company">Company</label>
+    <input type="text" name="company" />
+
+    <br />
+
+    <input type="submit" value="Verzend" />
+</form>
