@@ -1,0 +1,40 @@
+﻿@model Oef2.PresentationModels.PMAgenda
+
+@{
+    ViewBag.Title="IT Pro - Home";
+}
+
+<div class="jumbotron">
+    <h1>IT PRO</h1>
+    <p class="lead">The first IT event for...</p>
+</div>
+
+<div class="row">
+    <div class="col-md4">
+        <h2>Slot 1: 9.30 uur - 11.30 uur</h2>
+        <ol>
+            @foreach(var slot in Model.Slot1)
+            {
+                <li><a href="/agenda/detail?id=@slot.Id">@slot.Name</a></li>
+            }
+        </ol>
+    </div>
+    <div class="col-md4">
+        <h2>Slot 2: 13.30 uur - 15.30 uur</h2>
+        <ol>
+            @foreach(var slot in Model.Slot2)
+            {
+                <li><a href="/agenda/detail?id=@slot.Id">@slot.Name</a></li>
+            }
+        </ol>
+    </div>
+    <div class="col-md4">
+        <h2>Slot 3: 16.30 uur - 19.30 uur</h2>
+        <ol>
+            @foreach(var slot in Model.Slot3)
+            {
+                <li><a href="/agenda/detail?id=@slot.Id">@slot.Name</a></li>
+            }
+        </ol>
+    </div>
+</div>

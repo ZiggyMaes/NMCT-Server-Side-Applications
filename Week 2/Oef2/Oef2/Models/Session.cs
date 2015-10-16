@@ -6,7 +6,11 @@ using System.Threading.Tasks;
 
 namespace Oef2.Models
 {
-    class Session
+    public class Session
     {
+        public int Id { get; set; }
+        public int Slot { get; set; }
+        public string Name { get; set; }
+        public string Description { get; set; }
     }
 }
