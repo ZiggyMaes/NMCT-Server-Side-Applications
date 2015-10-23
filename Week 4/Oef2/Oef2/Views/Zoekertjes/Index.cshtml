@@ -1,0 +1,14 @@
+﻿@model IEnumerable<Zoekertje>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h1>Index</h1>
+
+<ul>
+    @foreach(Zoekertje zoekertje in Model)
+    {
+        <li>@Html.ActionLink(zoekertje.Titel, "Details", new { Id = zoekertje.Id })</li>
+    }
+</ul>

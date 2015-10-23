@@ -1,0 +1,41 @@
+﻿@model Zoekertje
+
+@{ 
+    ViewBag.Title = "Detail";
+}
+
+<h1>@Html.DisplayFor(z => z.Titel)</h1>
+
+@Html.LabelFor(z=>z.Omschrijving)
+@Html.DisplayFor(z=>z.Omschrijving)
+
+<br />
+<br />
+
+@Html.LabelFor(z => z.Prijs)
+@Html.DisplayFor(z => z.Prijs)
+
+<br />
+<br />
+
+@ViewBag.Locatie
+
+<br />
+<br />
+
+@ViewBag.Categorie
+
+<br />
+<br />
+
+@Html.LabelFor(z => z.ContacteerViaTelefoon)
+@Html.DisplayFor(z => z.Telefoon)
+
+<br />
+
+@Html.LabelFor(z => z.ContacteerViaEMail)
+@Html.DisplayFor(z => z.Email)
+
+<br />
+
+@Html.ActionLink("Terug", "Index")
