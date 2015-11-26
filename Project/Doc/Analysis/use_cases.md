@@ -11,28 +11,25 @@
     * manage password (if local login?)
     * extra: pic?
 * rate a message
-* search for messages
+* search for messages + filter messages
 * add child message to existing message
 * extra: edit own message
 * extra: report message
 * extra: reset password
 
 ## superuser
-* create message
+* create message/start thread
 
 ## admin
-* CRUD domains (areas)
-    * title
-    * image
-    * content
 * (un)block users
-* unregister users
+* unregister/delete users
 * fetch stats (extra: evolution over time)
-    * least active users
+    * user activity report
     * users per area
+    * user flow report
 * (un)hide messages
-* extra: delete message threads
-* extra: configure max message size
+* delete message threads
+* configure max message size
 
 ## system
 * promote superusers
