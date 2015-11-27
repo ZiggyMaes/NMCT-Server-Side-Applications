@@ -21,8 +21,10 @@
 * create message/start thread
 
 ## admin
+* create user
 * (un)block users
 * unregister/delete users
+* promote and demote users to and from the superuser statute
 * fetch stats (extra: evolution over time)
     * user activity report
     * users per area
