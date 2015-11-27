@@ -1,0 +1,36 @@
+@startuml
+
+title Use cases
+
+
+:User:
+rectangle start {
+User --> (logout)
+User --> (login)
+User --> (register)
+User --> (browse)
+}
+
+rectangle area{
+User ---> (select area)
+User ---> (enter area)
+User ---> (deselect area)
+}
+
+rectangle messages{
+User ---> (add message)
+User ---> (edit message)
+User ---> (filter)
+User ---> (rate message)
+}
+
+:Superuser: -|> User
+Superuser --> (create thread)
+
+:Admin: -|> Superuser
+Admin --> (stats)
+Admin --> (block, unblock)
+Admin --> (manage areas)
+
+
+@enduml
