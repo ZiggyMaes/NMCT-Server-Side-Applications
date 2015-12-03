@@ -182,6 +182,10 @@
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Images\airshow.jpg" />
+    <Content Include="Content\Images\cargo.jpg" />
+    <Content Include="Content\Images\civil-aviation.jpg" />
+    <Content Include="Content\Images\military.jpg" />
     <Content Include="Content\modern-business.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -286,7 +290,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>3920</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:3920/</IISUrl>
+          <IISUrl>http://localhost:3920</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>
