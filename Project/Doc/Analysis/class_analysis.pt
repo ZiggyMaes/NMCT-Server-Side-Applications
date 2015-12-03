@@ -1,0 +1,52 @@
+@startuml
+
+title Class Analysis
+
+User "1" -- "*" Message
+Rating "*" -- "1" Message
+
+class User {
+    userid: int
+    e-mail: string
+    password-hash: string
+    date-registered: datetime
+    last-login: datetime
+    superuser: bool
+    admin: bool
+    blocked: bool
+    inactive: bool
+
+    +block() / unblock()
+    +promote() / demote()
+}
+
+class Message {
+    messageid: int
+    title: string
+    body: string
+    time-posted: datetime
+    thread: bool
+    visible: bool
+    area: string
+    userid: int
+    
+    +create()/delete()
+    +rate() / derate()
+    +edit()
+    +show() / hide()
+    +search()
+}
+
+class Rating {
+    ratingid: int
+    stars: int
+    messageid: int
+}
+
+class Statistics {
+    +generateStats()
+}
+
+
+
+@enduml
