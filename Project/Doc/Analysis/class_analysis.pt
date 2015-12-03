@@ -4,6 +4,7 @@ title Class Analysis
 
 User "1" -- "*" Message
 Rating "*" -- "1" Message
+Rating "*" -- "1" User
 
 class User {
     userid: int
