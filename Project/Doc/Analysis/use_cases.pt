@@ -4,10 +4,12 @@ title Use cases
 
 
 :User:
+:Admin: -|> Superuser
+:System: -|> Superuser
 rectangle start {
-User --> (logout)
-User --> (login)
+User --> (login,logout)
 User --> (register)
+User --> (manage account)
 User --> (browse)
 }
 
@@ -18,19 +20,17 @@ User ---> (deselect area)
 }
 
 rectangle messages{
-User ---> (add message)
-User ---> (edit message)
-User ---> (filter)
-User ---> (rate message)
+User ---> (add)
+User ---> (edit)
+User ---> (search)
+User ---> (sort)
+User ---> (rate)
+Superuser --> (create thread)
+Admin --> (hide)
 }
 
-:Superuser: -|> User
-Superuser --> (create thread)
-
-:Admin: -|> Superuser
 Admin --> (stats)
-Admin --> (block, unblock)
-Admin --> (manage areas)
+Admin --> (block, unblock users)
 
 
 @enduml
