@@ -5,7 +5,7 @@ title Use cases
 
 :User:
 :Admin: -|> Superuser
-:System: -|> Superuser
+:Superuser: -|> User
 rectangle start {
 User --> (login,logout)
 User --> (register)
