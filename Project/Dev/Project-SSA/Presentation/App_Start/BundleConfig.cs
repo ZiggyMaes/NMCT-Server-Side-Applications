@@ -24,8 +24,7 @@ namespace Presentation
                       "~/Scripts/respond.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
-                      "~/Content/bootstrap.css",
-                      "~/Content/site.css"));
+                        "~/Content/modern-business.css", "~/Content/bootstrap.css"));
         }
     }
 }
