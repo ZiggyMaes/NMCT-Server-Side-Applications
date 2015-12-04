@@ -1,0 +1,5 @@
+issue,(emtpy separator to prevent URL to stick to planned date),planned date,planned hours,actual date,hours spent,comments
+https://github.com/ZiggyMaes/NMCT-Server-Side-Applications/issues/16,  ,04/12/2015,4.00,,2.00,"multi line comments?
+line 1
+line 2"
+https://github.com/ZiggyMaes/NMCT-Server-Side-Applications/issues/3,  ,04/12/2015,6.00,,2.00,
