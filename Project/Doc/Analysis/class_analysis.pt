@@ -1,10 +1,10 @@
 @startuml
 
-title Class Analysis
+title Class analysis
 
 User "1" -- "*" Message
-Rating "*" -- "1" Message
-Rating "*" -- "1" User
+Rating "*" -- "*" Message
+User "1" -- "*" Rating
 
 class User {
     userid: int
@@ -28,7 +28,7 @@ class Message {
     time-posted: datetime
     thread: bool
     visible: bool
-    area: string
+    areaid: int
     userid: int
     
     +create()/delete()
@@ -38,14 +38,23 @@ class Message {
     +search()
 }
 
+class Area{
+    title: String
+    image: Image
+}
+
+Message "*" -- "1" Area
+User "*" -- "2" Area
+
 class Rating {
     ratingid: int
     stars: int
     messageid: int
+    userid: int
 }
 
 class Statistics {
-    +generateStats()
+    [static] generateStats()
 }
 
 
