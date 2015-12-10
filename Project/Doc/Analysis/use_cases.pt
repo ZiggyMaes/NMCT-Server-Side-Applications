@@ -5,6 +5,7 @@ title Use cases
 
 :User:
 :Admin: -|> Superuser
+:Superuser: -|> User
 rectangle start {
 User --> (login,logout)
 User --> (register)
@@ -31,10 +32,5 @@ Admin --> (hide)
 Admin --> (stats)
 Admin --> (block, unblock users)
 
-rectangle system{
-System ---> (promote)
-}
-
-Superuser --> User
 
 @enduml
