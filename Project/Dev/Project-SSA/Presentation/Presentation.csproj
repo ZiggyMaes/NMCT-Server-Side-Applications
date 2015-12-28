@@ -210,7 +210,9 @@
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Views\Account\Register.cshtml" />
-    <None Include="Views\Home\index.cshtml" />
+    <None Include="Views\Home\Index.cshtml">
+      <BrowseToURL>~/Home/Index</BrowseToURL>
+    </None>
     <Content Include="Views\Testing\404.html" />
     <Content Include="Views\Testing\about.html" />
     <Content Include="Views\Testing\blog-home-1.html" />
