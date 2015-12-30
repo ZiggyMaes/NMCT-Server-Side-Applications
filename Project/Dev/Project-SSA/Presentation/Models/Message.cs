@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Presentation.Models
 {
-    public class Post
+    public class Message
     {
         public int Id { get; set; }
         public string Title { get; set; }
