@@ -34,8 +34,9 @@ namespace Presentation.Repositories
                         area.Id = int.Parse(reader["Id"].ToString());
                         area.Title = (reader["Title"] == DBNull.Value ? string.Empty : reader["Title"].ToString());
                         area.Description = (reader["Description"] == DBNull.Value ? string.Empty : reader["Description"].ToString());
-                    }
+                    } 
                 }
+                con.Close();
             }
             return area;
         }
