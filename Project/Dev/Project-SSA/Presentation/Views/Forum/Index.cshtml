@@ -1,5 +1,6 @@
-﻿@model Presentation.Models.Post
-
+﻿@*@model Presentation.Models.Message*@
+@model IEnumerable<Presentation.Models.Message>
+@*@model Presentation.Models.Area*@
 @{
     ViewBag.Title = "Index";
 }
@@ -14,7 +15,7 @@
             <tr>
                 <th class="cell-stat"></th>
                 <th>
-                    <h3>AREA NAME</h3>
+                    <h3>@ViewBag.CurrentArea</h3>
                 </th>
                 <th class="cell-stat text-center hidden-xs hidden-sm">Rating</th>
                 <th class="cell-stat text-center hidden-xs hidden-sm">Posts</th>
@@ -22,16 +23,18 @@
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <td class="text-center"><i class="fa fa-question fa-2x text-primary"></i></td>
-                <td>
-                    <h4><a href="#">TOPIC NAME 1</a></h4>
-                </td>
-                <td class="text-center hidden-xs hidden-sm">STARS</td>
-                <td class="text-center hidden-xs hidden-sm">13</td>
-                <td class="hidden-xs hidden-sm">by John Doe<br><small><i class="fa fa-clock-o"></i> 3 months ago</small></td>
-            </tr>
- 
+            @foreach (var m in Model)
+            {
+                <tr>
+                    <td class="text-center"><i class="fa fa-question fa-2x text-primary"></i></td>
+                    <td>
+                        <h4><a href="ViewThread?ThreadId=@m.Id">@m.Title</a></h4>
+                    </td>
+                    <td class="text-center hidden-xs hidden-sm">STARS</td>
+                    <td class="text-center hidden-xs hidden-sm">@m.PostCount</td>
+                    <td class="hidden-xs hidden-sm">by ID @m.UserId<br><small><i class="fa fa-clock-o"></i>@m.TimePosted.ToShortDateString()</small></td>
+                </tr>
+            }
         </tbody>
     </table>
 </div>

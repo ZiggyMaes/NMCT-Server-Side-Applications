@@ -34,7 +34,7 @@ namespace Presentation.Repositories
                         message.Id = int.Parse(reader["Id"].ToString());
                         message.Title = (reader["Title"] == DBNull.Value ? string.Empty : reader["Title"].ToString());
                         message.Body = (reader["Body"] == DBNull.Value ? string.Empty : reader["Description"].ToString());
-                        message.TimePosted = (reader["TimePosted"] == DBNull.Value ? DateTime.Now : DateTime.ParseExact(reader["TimePosted"].ToString(), "ddMMYYYY HH:mm", null));
+                        message.TimePosted = (reader["TimePosted"] == DBNull.Value ? DateTime.Now : DateTime.Parse(reader["TimePosted"].ToString()));
                         message.ParentId = int.Parse(reader["ParentId"].ToString());
                         message.Visible = bool.Parse(reader["Visible"].ToString());
                         message.AreaId = int.Parse(reader["AreaId"].ToString());
@@ -57,9 +57,9 @@ namespace Presentation.Repositories
                 using (SqlCommand cmd = new SqlCommand())
                 {
                     cmd.Connection = con;
-                    cmd.CommandText = "SELECT Id, Title, Body, TimePosted, ParentId, Visible, AreaId, UserId FROM dbo.Message WHERE ParentId = @ParentId";
+                    cmd.CommandText = "SELECT Id, Title, Body, TimePosted, ParentId, Visible, AreaId, UserId FROM dbo.Message WHERE AreaId = @AreaId AND ParentId = -1";
 
-                    cmd.Parameters.AddWithValue("ParentId", -1);
+                    cmd.Parameters.AddWithValue("Areaid", AreaId);
 
                     SqlDataReader reader = cmd.ExecuteReader();
                     while (reader.Read())
@@ -68,12 +68,13 @@ namespace Presentation.Repositories
 
                         m.Id = int.Parse(reader["Id"].ToString());
                         m.Title = (reader["Title"] == DBNull.Value ? string.Empty : reader["Title"].ToString());
-                        m.Body = (reader["Body"] == DBNull.Value ? string.Empty : reader["Description"].ToString());
-                        m.TimePosted = (reader["TimePosted"] == DBNull.Value ? DateTime.Now : DateTime.ParseExact(reader["TimePosted"].ToString(), "ddMMYYYY HH:mm", null));
+                        m.Body = (reader["Body"] == DBNull.Value ? string.Empty : reader["Body"].ToString());
+                        m.TimePosted = (reader["TimePosted"] == DBNull.Value ? DateTime.Now : DateTime.Parse(reader["TimePosted"].ToString()));
                         m.ParentId = int.Parse(reader["ParentId"].ToString());
                         m.Visible = bool.Parse(reader["Visible"].ToString());
                         m.AreaId = int.Parse(reader["AreaId"].ToString());
                         m.UserId = int.Parse(reader["UserId"].ToString());
+                        m.PostCount = GetPostcount(int.Parse(reader["Id"].ToString()));
 
                         Threads.Add(m);
                     }
@@ -83,7 +84,7 @@ namespace Presentation.Repositories
 
             return Threads;
         }
-        private static int GetPostcount(int ThreadId)
+        public static int GetPostcount(int ThreadId)
         {
             int posts = 0;
 
@@ -94,8 +95,8 @@ namespace Presentation.Repositories
                 using (SqlCommand cmd = new SqlCommand())
                 {
                     cmd.Connection = con;
-                    cmd.CommandText = "SELECT COUNT(Id) FROM dbo.Message WHERE Id = @ThreadId";
-                    cmd.Parameters.AddWithValue("threadId", ThreadId);
+                    cmd.CommandText = "SELECT COUNT(ParentId) FROM dbo.Message WHERE ParentId = @ThreadId";
+                    cmd.Parameters.AddWithValue("ThreadId", ThreadId);
 
                     posts = Convert.ToInt32(cmd.ExecuteScalar());
 
@@ -106,7 +107,7 @@ namespace Presentation.Repositories
 
             return posts;
         }
-        public static int Addmessage(bool IsThread, Message message)
+        public static int AddMessage(bool IsThread, Message message)
         {
             int MessageId = 0;
             using (SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString))

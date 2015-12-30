@@ -16,6 +16,6 @@ namespace Presentation.Models
         public bool Visible { get; set; }
         public int AreaId { get; set; }
         public int UserId { get; set; }
-
+        public int PostCount { get; set; }
     }
 }
