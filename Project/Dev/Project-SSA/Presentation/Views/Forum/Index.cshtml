@@ -1,0 +1,37 @@
+﻿@model Presentation.Models.Post
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<div class="container" style="margin-top: 35px">
+    <div class="page-header page-heading">
+        <h1 class="pull-left">Forum</h1>
+        <div class="clearfix"></div>
+    </div>
+    <table class="table forum table-striped">
+        <thead>
+            <tr>
+                <th class="cell-stat"></th>
+                <th>
+                    <h3>AREA NAME</h3>
+                </th>
+                <th class="cell-stat text-center hidden-xs hidden-sm">Rating</th>
+                <th class="cell-stat text-center hidden-xs hidden-sm">Posts</th>
+                <th class="cell-stat-2x hidden-xs hidden-sm">Last Post</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="text-center"><i class="fa fa-question fa-2x text-primary"></i></td>
+                <td>
+                    <h4><a href="#">TOPIC NAME 1</a></h4>
+                </td>
+                <td class="text-center hidden-xs hidden-sm">STARS</td>
+                <td class="text-center hidden-xs hidden-sm">13</td>
+                <td class="hidden-xs hidden-sm">by John Doe<br><small><i class="fa fa-clock-o"></i> 3 months ago</small></td>
+            </tr>
+ 
+        </tbody>
+    </table>
+</div>
