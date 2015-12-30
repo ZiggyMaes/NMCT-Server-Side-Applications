@@ -28,6 +28,7 @@ namespace Presentation.Repositories
                     cmd.Parameters.AddWithValue("AreaId", AreaId);
 
                     SqlDataReader reader = cmd.ExecuteReader();
+                    if (!reader.HasRows) return null;
                     while (reader.Read())
                     {
                         area.Id = int.Parse(reader["Id"].ToString());
