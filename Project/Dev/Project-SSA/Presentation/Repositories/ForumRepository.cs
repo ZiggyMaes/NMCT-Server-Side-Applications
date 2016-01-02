@@ -45,6 +45,42 @@ namespace Presentation.Repositories
             }
             return message;
         }
+        public static List<Message> GetMessages(int ThreadId)
+        {
+            List<Message> Messages = new List<Message>();
+
+            using (SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString))
+            {
+                con.Open();
+
+                using (SqlCommand cmd = new SqlCommand())
+                {
+                    cmd.Connection = con;
+                    cmd.CommandText = "SELECT Id, Title, Body, TimePosted, ParentId, Visible, AreaId, UserId FROM dbo.Message WHERE ParentId = @ThreadId";
+                    cmd.Parameters.AddWithValue("ThreadId", ThreadId);
+
+                    SqlDataReader reader = cmd.ExecuteReader();
+                    if (!reader.HasRows) return null;
+                    while (reader.Read())
+                    {
+                        Message m = new Message();
+
+                        m.Id = int.Parse(reader["Id"].ToString());
+                        m.Title = (reader["Title"] == DBNull.Value ? string.Empty : reader["Title"].ToString());
+                        m.Body = (reader["Body"] == DBNull.Value ? string.Empty : reader["Body"].ToString());
+                        m.TimePosted = (reader["TimePosted"] == DBNull.Value ? DateTime.Now : DateTime.Parse(reader["TimePosted"].ToString()));
+                        m.ParentId = int.Parse(reader["ParentId"].ToString());
+                        m.Visible = bool.Parse(reader["Visible"].ToString());
+                        m.AreaId = int.Parse(reader["AreaId"].ToString());
+                        m.UserId = int.Parse(reader["UserId"].ToString());
+
+                        Messages.Add(m);
+                    }
+                }
+                con.Close();
+            }
+            return Messages;
+        }
 
         public static List<Message> GetThreads(int AreaId)
         {
@@ -57,9 +93,9 @@ namespace Presentation.Repositories
                 using (SqlCommand cmd = new SqlCommand())
                 {
                     cmd.Connection = con;
-                    cmd.CommandText = "SELECT Id, Title, Body, TimePosted, ParentId, Visible, AreaId, UserId FROM dbo.Message WHERE AreaId = @AreaId AND ParentId = -1";
+                    cmd.CommandText = "SELECT Id, Title, Body, TimePosted, ParentId, Visible, AreaId, UserId FROM dbo.Message WHERE AreaId = @AreaId AND Id = ParentId";
 
-                    cmd.Parameters.AddWithValue("Areaid", AreaId);
+                    cmd.Parameters.AddWithValue("AreaId", AreaId);
 
                     SqlDataReader reader = cmd.ExecuteReader();
                     if (!reader.HasRows) return null;
@@ -99,7 +135,7 @@ namespace Presentation.Repositories
                     cmd.CommandText = "SELECT COUNT(ParentId) FROM dbo.Message WHERE ParentId = @ThreadId";
                     cmd.Parameters.AddWithValue("ThreadId", ThreadId);
 
-                    posts = Convert.ToInt32(cmd.ExecuteScalar());
+                    posts = Convert.ToInt32(cmd.ExecuteScalar()) - 1;//Thread headline does not count as post (even though it is a post)
                 }
 
                 con.Close();

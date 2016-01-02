@@ -30,10 +30,10 @@ namespace Presentation.Controllers
         {
             if (ThreadId == null) return RedirectToAction("Index", "Home");
 
-            Message Thread = ForumRepository.GetMessage(Convert.ToInt32(ThreadId));
-            if(Thread == null) return RedirectToAction("Index", "Home");
+            List<Message> Messages = ForumRepository.GetMessages(Convert.ToInt32(ThreadId));
+            if (Messages == null) return RedirectToAction("Index", "Home");
 
-            return View(Thread);
+            return View(Messages);
         }
 
         [HttpGet]

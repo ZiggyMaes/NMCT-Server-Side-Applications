@@ -1,24 +1,28 @@
-﻿@model Presentation.Models.Message
+﻿@model IEnumerable<Presentation.Models.Message>
 
 @{
-    ViewBag.Title = Model.Title;
+    ViewBag.Title = Model.First().Title;
 }
 
 <div class="container">
-    <h2 class="page-header"><i class="fa fa-pencil"></i><a href="Index?AreaId=@Model.AreaId">Forum ></a> @Model.Title</h2>
+    <h2 class="page-header"><i class="fa fa-pencil"></i><a href="Index?AreaId=@Model.First().AreaId">Forum ></a> @Model.First().Title</h2>
     <ul class="media-list forum">
-        <li class="media well">
-            <div class="pull-left user-info" href="#">
-                <img class="avatar img-circle img-thumbnail" src="http://snipplicious.com/images/guest.png" width="64" alt="Generic placeholder image">
-                <strong><a href="user.html">USERNAME</a></strong>
-                <small>USER TITLE</small>
-            </div>
-            <div class="media-body">
-                <div class="forum-post-panel btn-group btn-group-xs">
-                    <a href="#" class="btn btn-default"><i class="fa fa-clock-o"></i>@Model.TimePosted.ToString("f")</a>
+        @foreach (var m in Model)
+        {
+            <li class="media well">
+                <div class="pull-left user-info" href="#">
+                    <img class="avatar img-circle img-thumbnail" src="http://snipplicious.com/images/guest.png" width="64" alt="Generic placeholder image">
+                    <strong><a href="user.html">USERNAME</a></strong>
+                    <small>USER TITLE</small>
                 </div>
-                <p>@Model.Body</p>
-            </div>
-        </li>
+                <div class="media-body">
+                    <div class="forum-post-panel btn-group btn-group-xs">
+                        <a href="#" class="btn btn-default"><i class="fa fa-clock-o"></i>@m.TimePosted.ToString("f")</a>
+                    </div>
+                    <p>@m.Body</p>
+                </div>
+            </li>
+        }
+
     </ul>
 </div>
