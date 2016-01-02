@@ -26,6 +26,17 @@ namespace Presentation.Controllers
         }
 
         [HttpGet]
+        public ActionResult ViewThread(int? ThreadId)
+        {
+            if (ThreadId == null) return RedirectToAction("Index", "Home");
+
+            Message Thread = ForumRepository.GetMessage(Convert.ToInt32(ThreadId));
+            if(Thread == null) return RedirectToAction("Index", "Home");
+
+            return View(Thread);
+        }
+
+        [HttpGet]
         public ActionResult NewThread(int? AreaId)
         {
             if (AreaId == null) return RedirectToAction("Index", "Home");
@@ -47,7 +58,7 @@ namespace Presentation.Controllers
 
             ForumRepository.AddMessage(Thread);
 
-            return View("Index");
+            return View("ViewThread");
         }
     }
 }

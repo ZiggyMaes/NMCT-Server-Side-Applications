@@ -33,7 +33,7 @@ namespace Presentation.Repositories
                     {
                         message.Id = int.Parse(reader["Id"].ToString());
                         message.Title = (reader["Title"] == DBNull.Value ? string.Empty : reader["Title"].ToString());
-                        message.Body = (reader["Body"] == DBNull.Value ? string.Empty : reader["Description"].ToString());
+                        message.Body = (reader["Body"] == DBNull.Value ? string.Empty : reader["Body"].ToString());
                         message.TimePosted = (reader["TimePosted"] == DBNull.Value ? DateTime.Now : DateTime.Parse(reader["TimePosted"].ToString()));
                         message.ParentId = int.Parse(reader["ParentId"].ToString());
                         message.Visible = bool.Parse(reader["Visible"].ToString());
@@ -62,6 +62,7 @@ namespace Presentation.Repositories
                     cmd.Parameters.AddWithValue("Areaid", AreaId);
 
                     SqlDataReader reader = cmd.ExecuteReader();
+                    if (!reader.HasRows) return null;
                     while (reader.Read())
                     {
                         Message m = new Message();
@@ -99,7 +100,6 @@ namespace Presentation.Repositories
                     cmd.Parameters.AddWithValue("ThreadId", ThreadId);
 
                     posts = Convert.ToInt32(cmd.ExecuteScalar());
-
                 }
 
                 con.Close();
