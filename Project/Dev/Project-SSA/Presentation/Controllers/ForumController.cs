@@ -35,7 +35,6 @@ namespace Presentation.Controllers
 
             return View(Messages);
         }
-
         [HttpGet]
         public ActionResult NewThread(int? AreaId)
         {
@@ -59,6 +58,12 @@ namespace Presentation.Controllers
             ForumRepository.AddMessage(Thread);
 
             return View("ViewThread");
+        }
+        
+        [HttpGet]
+        public ActionResult PostComment()
+        {
+            return View();
         }
     }
 }

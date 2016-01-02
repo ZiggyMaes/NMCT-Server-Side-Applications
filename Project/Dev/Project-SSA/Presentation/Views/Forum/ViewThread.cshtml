@@ -23,6 +23,8 @@
                 </div>
             </li>
         }
-
     </ul>
+
+    @Html.Action("PostComment", "Forum", new { ThreadId = Model.First().Id })
+
 </div>
