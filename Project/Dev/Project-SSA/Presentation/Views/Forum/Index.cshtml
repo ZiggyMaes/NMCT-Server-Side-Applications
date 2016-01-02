@@ -1,6 +1,5 @@
-﻿@*@model Presentation.Models.Message*@
-@model IEnumerable<Presentation.Models.Message>
-@*@model Presentation.Models.Area*@
+﻿@model IEnumerable<Presentation.Models.Message>
+
 @{
     ViewBag.Title = "Index";
 }
@@ -15,7 +14,7 @@
             <tr>
                 <th class="cell-stat"></th>
                 <th>
-                    <h3>@ViewBag.CurrentArea</h3>
+                    <h3>Discussions about @ViewBag.CurrentArea</h3>
                 </th>
                 <th class="cell-stat text-center hidden-xs hidden-sm">Rating</th>
                 <th class="cell-stat text-center hidden-xs hidden-sm">Posts</th>
@@ -37,4 +36,5 @@
             }
         </tbody>
     </table>
+    <a href="NewThread?AreaId=@ViewBag.CurrentAreaId" class="btn btn-primary pull-right" role="button">New thread</a>
 </div>

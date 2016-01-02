@@ -19,6 +19,7 @@ namespace Presentation.Controllers
             List<Message> Threads = ForumRepository.GetThreads(Convert.ToInt32(AreaId));
 
             ViewBag.CurrentArea = CurrentArea.Title;
+            ViewBag.CurrentAreaId = CurrentArea.Id;
             return View(Threads);
         }
     }
