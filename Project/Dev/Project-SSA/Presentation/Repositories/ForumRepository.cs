@@ -107,7 +107,7 @@ namespace Presentation.Repositories
 
             return posts;
         }
-        public static int AddMessage(bool IsThread, Message message)
+        public static int AddMessage(Message message)
         {
             int MessageId = 0;
             using (SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString))
@@ -121,8 +121,7 @@ namespace Presentation.Repositories
                     cmd.Parameters.AddWithValue("Title", message.Title);
                     cmd.Parameters.AddWithValue("Body", message.Body);
                     cmd.Parameters.AddWithValue("TimePosted", DateTime.Now);
-                    if(IsThread) cmd.Parameters.AddWithValue("ParentId", -1); //ParentId is -1 for threads/topics
-                    else cmd.Parameters.AddWithValue("ParentId", message.ParentId); //Parent MessageId for regular posts
+                    cmd.Parameters.AddWithValue("ParentId", message.ParentId); //-1 for threads, other value for message
                     cmd.Parameters.AddWithValue("Visible", true);
                     cmd.Parameters.AddWithValue("AreaId", message.AreaId);
                     cmd.Parameters.AddWithValue("UserId", message.UserId);
