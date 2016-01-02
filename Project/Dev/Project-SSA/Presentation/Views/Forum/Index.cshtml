@@ -23,17 +23,24 @@
             </tr>
         </thead>
         <tbody>
-            @foreach (var m in Model)
+            @if (Model == null)
             {
-                <tr>
-                    <td class="text-center"><i class="fa fa-question fa-2x text-primary"></i></td>
-                    <td>
-                        <h4><a href="ViewThread?ThreadId=@m.Id">@m.Title</a></h4>
-                    </td>
-                    <td class="text-center hidden-xs hidden-sm">STARS</td>
-                    <td class="text-center hidden-xs hidden-sm">@m.PostCount</td>
-                    <td class="hidden-xs hidden-sm">by ID @m.UserId<br><small><i class="fa fa-clock-o"></i>@m.TimePosted.ToShortDateString()</small></td>
-                </tr>
+
+            }
+            else
+            {
+                foreach (var m in Model)
+                {
+                    <tr>
+                        <td class="text-center"><i class="fa fa-question fa-2x text-primary"></i></td>
+                        <td>
+                            <h4><a href="ViewThread?ThreadId=@m.Id">@m.Title</a></h4>
+                        </td>
+                        <td class="text-center hidden-xs hidden-sm">STARS</td>
+                        <td class="text-center hidden-xs hidden-sm">@m.PostCount</td>
+                        <td class="hidden-xs hidden-sm">by ID @m.UserId<br><small><i class="fa fa-clock-o"></i>@m.TimePosted.ToShortDateString()</small></td>
+                    </tr>
+                }
             }
         </tbody>
     </table>

@@ -35,6 +35,11 @@ namespace Presentation.Controllers
 
             return View(Messages);
         }
+        [HttpPost]
+        public ActionResult ViewThread(Message Comment)
+        {
+           return PostComment(Comment);
+        }
         [HttpGet]
         public ActionResult NewThread(int? AreaId)
         {
@@ -61,9 +66,23 @@ namespace Presentation.Controllers
         }
         
         [HttpGet]
-        public ActionResult PostComment()
+        public ActionResult PostComment(int? ThreadId)
         {
+            ViewBag.ThreadId = Convert.ToInt32(ThreadId);
             return View();
+        }
+
+        [HttpPost]
+        public ActionResult PostComment(Message Comment)
+        {
+            Comment.Title = "RE";
+            Comment.TimePosted = DateTime.Now;
+            Comment.Visible = true;
+            Comment.UserId = 0; // ---------> MUST CHANGE!!!!!!!!!!!!!!!
+
+            ForumRepository.AddMessage(Comment);
+
+            return View("Index");
         }
     }
 }
