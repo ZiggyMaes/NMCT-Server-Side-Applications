@@ -11,6 +11,9 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using Microsoft.Owin.Security;
 using Presentation.Models;
+using System.Net.Mail;
+using Presentation.Settings;
+using System.Net;
 
 namespace Presentation
 {
@@ -18,7 +21,21 @@ namespace Presentation
     {
         public Task SendAsync(IdentityMessage message)
         {
-            // Plug in your email service here to send an email.
+            MailMessage mailMessage = new MailMessage();
+            mailMessage.From = new System.Net.Mail.MailAddress(AppSettings.FromMail);
+            mailMessage.To.Add(message.Destination);
+            mailMessage.IsBodyHtml = true;
+            mailMessage.Body = message.Body;
+            mailMessage.Subject = message.Subject;
+
+            string username = AppSettings.Username;
+            string password = AppSettings.Password;
+            NetworkCredential networkCred = new NetworkCredential(username, password);
+            SmtpClient smtpCl = new SmtpClient(AppSettings.SMTPServer, Convert.ToInt32(AppSettings.SMTPPort));
+            smtpCl.EnableSsl = true;
+            smtpCl.Credentials = networkCred;
+
+            smtpCl.Send(mailMessage);
             return Task.FromResult(0);
         }
     }
