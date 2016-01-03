@@ -11,6 +11,7 @@ namespace Presentation.Controllers
     public class AreaController : Controller
     {
         [HttpGet]
+        [Authorize(Roles = "Administrator, Superuser, User")]
         public ActionResult Index(int? AreaId)
         {
             if(AreaId == null) return RedirectToAction("Index", "Home");

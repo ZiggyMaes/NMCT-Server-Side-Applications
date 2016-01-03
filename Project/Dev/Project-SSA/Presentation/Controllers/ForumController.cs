@@ -11,6 +11,7 @@ namespace Presentation.Controllers
     public class ForumController : Controller
     {
         [HttpGet]
+        [Authorize(Roles = "Administrator, Superuser, User")]
         public ActionResult Index(int? AreaId)
         {
             if (AreaId == null) return RedirectToAction("Index", "Home");
@@ -26,6 +27,7 @@ namespace Presentation.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "Administrator, Superuser, User")]
         public ActionResult ViewThread(int? ThreadId)
         {
             if (ThreadId == null) return RedirectToAction("Index", "Home");
@@ -36,17 +38,19 @@ namespace Presentation.Controllers
             return View(Messages);
         }
         [HttpPost]
+        [Authorize(Roles = "Administrator, Superuser, User")]
         public ActionResult ViewThread(Message Comment)
         {
-           return PostComment(Comment);
+            return PostComment(Comment);
         }
         [HttpGet]
         public ActionResult NewThread(int? AreaId)
         {
             if (AreaId == null) return RedirectToAction("Index", "Home");
+            if (!User.IsInRole("Superuser") && !User.IsInRole("Administrator")) return View("FaultyRole");
 
             Area CurrentArea = AreaRepository.GetAreaInfo(Convert.ToInt32(AreaId));
-            if (CurrentArea == null) return RedirectToAction("Index", "Home"); //if no records were returned
+            if (CurrentArea == null) return RedirectToAction("Index", "Home"); //if valid area was found
 
             ViewBag.AreaId = Convert.ToInt32(AreaId);
             return View();
@@ -55,6 +59,7 @@ namespace Presentation.Controllers
         [HttpPost]
         public ActionResult NewThread(Message Thread)
         {
+            if (!User.IsInRole("Superuser") && !User.IsInRole("Administrator")) return View("FaultyRole");
             int ThreadId = 0;
 
             Thread.TimePosted = DateTime.Now;
@@ -67,6 +72,7 @@ namespace Presentation.Controllers
         }
         
         [HttpGet]
+        [Authorize(Roles = "Administrator, Superuser, User")]
         public ActionResult PostComment(int? ThreadId)
         {
             ViewBag.ThreadId = Convert.ToInt32(ThreadId);
@@ -74,6 +80,7 @@ namespace Presentation.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Administrator, Superuser, User")]
         public ActionResult PostComment(Message Comment)
         {
             Comment.Title = "RE";
