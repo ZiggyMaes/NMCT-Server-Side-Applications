@@ -55,15 +55,15 @@ namespace Presentation
             //   consumerKey: "",
             //   consumerSecret: "");
 
-            //app.UseFacebookAuthentication(
-            //   appId: "",
-            //   appSecret: "");
+            app.UseFacebookAuthentication(
+            appId: "933875660038188",
+            appSecret: "dbd9f597908b36307cf3a44695192f27");
 
-            //app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
-            //{
-            //    ClientId = "",
-            //    ClientSecret = ""
-            //});
+            app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
+            {
+                ClientId = "614412197970-duepboeoph29n347694mf0jgafkp40mk.apps.googleusercontent.com",
+                ClientSecret = "IQz-3eWxPXyc3g2awRnungYb"
+            });
         }
     }
 }
