@@ -205,5 +205,59 @@ namespace Presentation.Repositories
                 con.Close();
             }
         }
+        public static void AddRating(Rating rating)
+        {
+            int MessageId = 0;
+            using (SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString))
+            {
+                con.Open();
+
+                using (SqlCommand cmd = new SqlCommand())
+                {
+                    cmd.Connection = con;
+                    cmd.CommandText = "INSERT INTO dbo.Message (Stars, MessageId, UserId) VALUES(@Stars, @MessageId, @UserId);";
+                    cmd.Parameters.AddWithValue("Stars", rating.Stars);
+                    cmd.Parameters.AddWithValue("MessageId", rating.MessageId);
+                    cmd.Parameters.AddWithValue("UserId", rating.UserId);
+
+                    MessageId = int.Parse(cmd.ExecuteScalar().ToString());
+                }
+
+                con.Close();
+            }
+        }
+        public static List<Rating> GetRatings(int MessageId)
+        {
+            List<Rating> Ratings = new List<Rating>();
+
+            using (SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString))
+            {
+                con.Open();
+
+                using (SqlCommand cmd = new SqlCommand())
+                {
+                    cmd.Connection = con;
+                    cmd.CommandText = "SELECT Id, Stars, MessageId, UserId FROM dbo.Message WHERE MessageId = @MessageId";
+
+                    cmd.Parameters.AddWithValue("MessageId", MessageId);
+
+                    SqlDataReader reader = cmd.ExecuteReader();
+                    if (!reader.HasRows) return null;
+                    while (reader.Read())
+                    {
+                        Rating r = new Rating();
+
+                        r.Id = int.Parse(reader["Id"].ToString());
+                        r.Stars = int.Parse(reader["Stars"].ToString());
+                        r.MessageId = int.Parse(reader["MessageId"].ToString());
+                        r.UserId = int.Parse(reader["UserId"].ToString());
+
+                        Ratings.Add(r);
+                    }
+                }
+                con.Close();
+            }
+            return Ratings;
+        }
     }
 }

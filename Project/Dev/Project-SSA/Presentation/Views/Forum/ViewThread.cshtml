@@ -14,10 +14,18 @@
                     <img class="avatar img-circle img-thumbnail" src="http://snipplicious.com/images/guest.png" width="64" alt="Generic placeholder image">
                     <strong><a href="user.html">USERNAME</a></strong>
                     <small>USER TITLE</small>
+                    <hr />
+                    <a class="btn btn-danger btn-xs star-rating" data-rating="0">
+                        <i class="fa fa-star" data-prev-rating-class="fa fa-star"></i>
+                        <i class="fa fa-star" data-prev-rating-class="fa fa-star"></i>
+                        <i class="fa fa-star" data-prev-rating-class="fa fa-star"></i>
+                        <i class="fa fa-star" data-prev-rating-class="fa fa-star"></i>
+                        <i class="fa fa-star-half-full" data-prev-rating-class="fa fa-star-half-full"></i>
+                    </a>
                 </div>
                 <div class="media-body">
-                    <div class="forum-post-panel btn-group btn-group-xs">
-                        <a href="#" class="btn btn-default"><i class="fa fa-clock-o"></i>@m.TimePosted.ToString("f")</a>
+                    <div class="forum-post-panel col-sm-12">
+                        <i class="fa fa-clock-o col-sm-12"> Posted @m.TimePosted.ToString("f")</i>
                     </div>
                     <p>@m.Body</p>
                 </div>

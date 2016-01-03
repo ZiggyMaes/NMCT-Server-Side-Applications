@@ -6263,8 +6263,8 @@ button.close {
 }
 
 .forum .fa {
-    width: 1em;
-    text-align: center;
+    width: auto;
+    text-align: left;
 }
 
 .forum.table th.cell-stat {
