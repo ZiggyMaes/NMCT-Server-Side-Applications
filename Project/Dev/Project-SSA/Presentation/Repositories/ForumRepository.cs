@@ -179,7 +179,6 @@ namespace Presentation.Repositories
                 {
                     cmd.Connection = con;
                     cmd.CommandText = "UPDATE dbo.Message SET ParentId = Id WHERE Id = @Id;";
-
                     cmd.Parameters.AddWithValue("Id", MessageId);
 
                     cmd.ExecuteNonQuery();

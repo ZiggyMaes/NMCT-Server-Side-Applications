@@ -63,7 +63,7 @@ namespace Presentation.Controllers
             ThreadId = ForumRepository.AddMessage(Thread);
             ForumRepository.UpdateParentId(ThreadId);//Update the ParentId value of the thread to match the Id (this is how we differentiate threads from posts)
 
-            return RedirectToAction("ViewThread", "Message", new { ThreadId = ThreadId });
+            return RedirectToAction("ViewThread", new { ThreadId = ThreadId });
         }
         
         [HttpGet]
@@ -82,7 +82,7 @@ namespace Presentation.Controllers
 
             ForumRepository.AddMessage(Comment);
 
-            return View("Index");
+            return RedirectToAction("ViewThread", new { ThreadId = Comment.ParentId });
         }
     }
 }
