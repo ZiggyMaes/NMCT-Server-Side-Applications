@@ -8,5 +8,11 @@
 
 <h2>@Model.Title</h2>
 
-@Model.Description
-<a href="/Forum/Index?AreaId=@Model.Id" class="btn btn-info btn-block" role="button">Take me to this awesome forum!</a>
+@*@Model.Description*@
+<p>
+    Deze pagina is dynamisch. @*@Model.Description*@ is een database kolom en object property die de HTML zal bevatten voor deze pagina in te laden.
+    Hier: per gebied enkele URLs naar foto's die leuk zijn (een vijftal? weet nog niet goed hoe ik ze wal weergeven)
+    Hier: algemene informatie over het interesse gebied. Interessante weetjes? Nieuws? Uhm... 
+</p>
+
+<a href="/Forum/Index?AreaId=@Model.Id" class="btn btn-info btn-block" role="button">Hier: call to action om door te gaan naar het forum van het interessegebied</a>
