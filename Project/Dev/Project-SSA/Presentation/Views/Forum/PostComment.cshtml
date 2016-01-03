@@ -9,6 +9,8 @@
     <div class="form-horizontal">
         <h4>Comment on this discussion...</h4>
         <hr />
+        <input type="hidden" name="ParentId" value="@ViewBag.ThreadId" />
+
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
         <div class="form-group form-horizontal">
@@ -17,8 +19,6 @@
                 @Html.ValidationMessageFor(model => model.Body, "", new { @class = "text-danger" })
             </div>
         </div>
-
-        <input type="hidden" name="ParentId" value="@ViewBag.ThreadId" />
 
         <div class="form-group">
                 <input type="submit" value="Post reply" class="btn btn-primary center-block" />

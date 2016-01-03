@@ -169,6 +169,25 @@ namespace Presentation.Repositories
                 return MessageId;
             }
         }
+        public static void UpdateParentId(int MessageId)
+        {
+            using (SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString))
+            {
+                con.Open();
+
+                using (SqlCommand cmd = new SqlCommand())
+                {
+                    cmd.Connection = con;
+                    cmd.CommandText = "UPDATE dbo.Message SET ParentId = Id WHERE Id = @Id;";
+
+                    cmd.Parameters.AddWithValue("Id", MessageId);
+
+                    cmd.ExecuteNonQuery();
+                }
+
+                con.Close();
+            }
+        }
         public static void HideMessage(int MessageId)
         {
             using (SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString))
