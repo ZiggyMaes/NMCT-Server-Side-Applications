@@ -11,6 +11,8 @@ namespace Presentation.Models
     public class ApplicationUser : IdentityUser
     {
         public string DisplayName { get; set; }
+        public string Area1 { get; set; }
+        public string Area2 { get; set; }
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {
