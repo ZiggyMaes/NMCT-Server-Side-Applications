@@ -10,7 +10,7 @@ namespace Presentation.Models
         public string Email { get; set; }
         [Required]
         [Display(Name = "Display name")]
-        public string UserName { get; set; }
+        public string DisplayName { get; set; }
     }
 
     public class ExternalLoginListViewModel
@@ -69,7 +69,7 @@ namespace Presentation.Models
     {
         [Required]
         [Display(Name = "Display name")]
-        public string UserName { get; set; }
+        public string DisplayName { get; set; }
         [Required]
         [EmailAddress]
         [Display(Name = "Email")]

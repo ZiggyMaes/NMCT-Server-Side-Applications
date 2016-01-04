@@ -137,10 +137,28 @@ namespace Presentation.Repositories
 
                     posts = Convert.ToInt32(cmd.ExecuteScalar()) - 1;//Thread headline does not count as post (even though it is a post)
                 }
-
                 con.Close();
             }
+            return posts;
+        }
+        public static int GetPostcount(string UserId)
+        {
+            int posts = 0;
 
+            using (SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString))
+            {
+                con.Open();
+
+                using (SqlCommand cmd = new SqlCommand())
+                {
+                    cmd.Connection = con;
+                    cmd.CommandText = "SELECT COUNT(ParentId) FROM dbo.Message WHERE UserId = @UserId";
+                    cmd.Parameters.AddWithValue("UserId", UserId);
+
+                    posts = Convert.ToInt32(cmd.ExecuteScalar());
+                }
+                con.Close();
+            }
             return posts;
         }
         public static int AddMessage(Message message)
@@ -251,7 +269,7 @@ namespace Presentation.Repositories
                         r.Stars = int.Parse(reader["Stars"].ToString());
                         r.MessageId = int.Parse(reader["MessageId"].ToString());
                         r.UserId = (reader["UserId"] == DBNull.Value ? string.Empty : reader["UserId"].ToString());
-                        r.UserName = UserRepository.GetUser(r.UserId).UserName;
+                        r.UserName = UserRepository.GetUser(r.UserId).DisplayName;
 
                         Ratings.Add(r);
                     }

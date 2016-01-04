@@ -22,14 +22,15 @@ namespace Presentation.Repositories
                 using (SqlCommand cmd = new SqlCommand())
                 {
                     cmd.Connection = con;
-                    cmd.CommandText = "SELECT u.Id, u.Email, u.UserName, ur.RoleId, r.Name FROM dbo.AspNetUsers as u INNER JOIN dbo.AspNetUserRoles as ur ON u.Id = ur.UserId INNER JOIN dbo.AspNetRoles as r ON ur.RoleId = r.Id ORDER BY u.Email";
+                    cmd.CommandText = "SELECT u.Id, u.DisplayName, u.Email, r.Name FROM dbo.AspNetUsers as u INNER JOIN dbo.AspNetUserRoles as ur ON u.Id = ur.UserId INNER JOIN dbo.AspNetRoles as r ON ur.RoleId = r.Id WHERE u.Id = @UserId";
+                    cmd.Parameters.AddWithValue("UserId", UserId);
 
                     SqlDataReader reader = cmd.ExecuteReader();
                     if (reader == null) return null;
                     while (reader.Read())
                     {
                         FoundUser.UserId = (reader["Id"] == DBNull.Value ? string.Empty : reader["Id"].ToString());
-                        FoundUser.UserName = (reader["UserName"] == DBNull.Value ? string.Empty : reader["UserName"].ToString());
+                        FoundUser.DisplayName = (reader["DisplayName"] == DBNull.Value ? string.Empty : reader["DisplayName"].ToString());
                         FoundUser.Email = (reader["Email"] == DBNull.Value ? string.Empty : reader["Email"].ToString());
                         FoundUser.Role = (reader["Name"] == DBNull.Value ? string.Empty : reader["Name"].ToString());
                         //FoundUser.Area1 = (reader["Area1"] == DBNull.Value ? string.Empty : reader["Area1"].ToString());

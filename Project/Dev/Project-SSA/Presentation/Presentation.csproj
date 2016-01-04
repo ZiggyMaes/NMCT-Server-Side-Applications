@@ -227,6 +227,7 @@
     <Content Include="Views\Area\Index.cshtml" />
     <Content Include="Views\Forum\NewThread.cshtml" />
     <Content Include="Views\Forum\ViewThread.cshtml" />
+    <Content Include="Views\Error\AccessDenied.cshtml" />
     <None Include="Views\Home\Index.cshtml">
       <BrowseToURL>~/Home/Index</BrowseToURL>
     </None>

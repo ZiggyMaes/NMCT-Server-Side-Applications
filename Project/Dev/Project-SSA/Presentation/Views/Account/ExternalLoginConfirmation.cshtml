@@ -20,8 +20,8 @@
     <div class="form-group">
         @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
         <div class="col-md-10">
-            @Html.TextBoxFor(m => m.UserName, new { @class = "form-control" })
-            @Html.ValidationMessageFor(m => m.UserName, "", new { @class = "text-danger" })
+            @Html.TextBoxFor(m => m.DisplayName, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.DisplayName, "", new { @class = "text-danger" })
         </div>
         <div class="col-md-10">
             @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })

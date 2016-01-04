@@ -62,10 +62,10 @@ namespace Presentation.Controllers
         public ActionResult NewThread(int? AreaId)
         {
             if (AreaId == null) return RedirectToAction("Index", "Home");
-            if (!User.IsInRole("Superuser") && !User.IsInRole("Administrator")) return View("FaultyRole");
+            if (!User.IsInRole("Superuser") && !User.IsInRole("Administrator")) return RedirectToAction("AccessDenied", "Error");
 
             Area CurrentArea = AreaRepository.GetAreaInfo(Convert.ToInt32(AreaId));
-            if (CurrentArea == null) return RedirectToAction("Index", "Home"); //if valid area was found
+            if (CurrentArea == null) return RedirectToAction("Index", "Home"); //if no valid area was found
 
             ViewBag.AreaId = Convert.ToInt32(AreaId);
             return View();
@@ -78,7 +78,7 @@ namespace Presentation.Controllers
             int ThreadId = 0;
 
             Thread.TimePosted = DateTime.Now;
-            Thread.UserInfo = UserRepository.GetUser(UserManager.FindById(User.Identity.GetUserId()).Id);
+            Thread.UserInfo = UserRepository.GetUser(UserManager.FindByEmail(User.Identity.Name).Id);
 
             ThreadId = ForumRepository.AddMessage(Thread);
             ForumRepository.UpdateParentId(ThreadId);//Update the ParentId value of the thread to match the Id (this is how we differentiate threads from posts)
@@ -100,9 +100,11 @@ namespace Presentation.Controllers
         {
             Comment.Title = "RE";
             Comment.TimePosted = DateTime.Now;
-            Comment.UserInfo = UserRepository.GetUser(UserManager.FindById(User.Identity.GetUserId()).Id);
+            Comment.UserInfo = UserRepository.GetUser(UserManager.FindByEmail(User.Identity.Name).Id);
 
             ForumRepository.AddMessage(Comment);
+
+            if (ForumRepository.GetPostcount(Comment.UserInfo.UserId) == 5) UserRepository.SetRole(Comment.UserInfo.UserId, 2);
 
             return RedirectToAction("ViewThread", new { ThreadId = Comment.ParentId });
         }
