@@ -36,10 +36,44 @@ namespace Presentation.Repositories
                         //FoundUser.Area2 = (reader["Area2"] == DBNull.Value ? string.Empty : reader["Area2"].ToString());
                     }
                 }
-
                 con.Close();
             }
             return FoundUser;
+        }
+        public static void LockUser(string UserId)
+        {
+            using (SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString))
+            {
+                con.Open();
+
+                using (SqlCommand cmd = new SqlCommand())
+                {
+                    cmd.Connection = con;
+                    cmd.CommandText = "UPDATE dbo.AspNetUsers SET LockoutEndDateUtc = '2999-12-31' WHERE UserId = @UserId; ";
+                    cmd.Parameters.AddWithValue("UserId", UserId);
+
+                    cmd.ExecuteNonQuery();
+                }
+                con.Close();
+            }
+        }
+        public static void SetRole(string UserId, int RoleValue)
+        {
+            using (SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString))
+            {
+                con.Open();
+
+                using (SqlCommand cmd = new SqlCommand())
+                {
+                    cmd.Connection = con;
+                    cmd.CommandText = "UPDATE dbo.AspNetUserRoles SET RoleId = @RoleValue WHERE UserId = @UserId;";
+                    cmd.Parameters.AddWithValue("RoleValue", RoleValue);
+                    cmd.Parameters.AddWithValue("UserId", UserId);
+
+                    cmd.ExecuteNonQuery();
+                }
+                con.Close();
+            }
         }
     }
 }
