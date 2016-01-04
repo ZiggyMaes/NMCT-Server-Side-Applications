@@ -38,7 +38,7 @@ namespace Presentation.Repositories
                         message.ParentId = int.Parse(reader["ParentId"].ToString());
                         message.Visible = bool.Parse(reader["Visible"].ToString());
                         message.AreaId = int.Parse(reader["AreaId"].ToString());
-                        message.UserId = int.Parse(reader["UserId"].ToString());
+                        message.UserInfo = UserRepository.GetUser((reader["UserId"] == DBNull.Value ? string.Empty : reader["UserId"].ToString()));
                     }
                 }
                 con.Close();
@@ -72,7 +72,7 @@ namespace Presentation.Repositories
                         m.ParentId = int.Parse(reader["ParentId"].ToString());
                         m.Visible = bool.Parse(reader["Visible"].ToString());
                         m.AreaId = int.Parse(reader["AreaId"].ToString());
-                        m.UserId = int.Parse(reader["UserId"].ToString());
+                        m.UserInfo = UserRepository.GetUser((reader["UserId"] == DBNull.Value ? string.Empty : reader["UserId"].ToString()));
 
                         Messages.Add(m);
                     }
@@ -110,7 +110,7 @@ namespace Presentation.Repositories
                         m.ParentId = int.Parse(reader["ParentId"].ToString());
                         m.Visible = bool.Parse(reader["Visible"].ToString());
                         m.AreaId = int.Parse(reader["AreaId"].ToString());
-                        m.UserId = int.Parse(reader["UserId"].ToString());
+                        m.UserInfo = UserRepository.GetUser((reader["UserId"] == DBNull.Value ? string.Empty : reader["UserId"].ToString()));
                         m.PostCount = GetPostcount(int.Parse(reader["Id"].ToString()));
 
                         Threads.Add(m);
@@ -160,7 +160,7 @@ namespace Presentation.Repositories
                     cmd.Parameters.AddWithValue("ParentId", message.ParentId); //-1 for threads, other value for message
                     cmd.Parameters.AddWithValue("Visible", true);
                     cmd.Parameters.AddWithValue("AreaId", message.AreaId);
-                    cmd.Parameters.AddWithValue("UserId", message.UserId);
+                    cmd.Parameters.AddWithValue("UserId", message.UserInfo.UserId);
 
                     MessageId = int.Parse(cmd.ExecuteScalar().ToString());
                 }
@@ -250,7 +250,8 @@ namespace Presentation.Repositories
                         r.Id = int.Parse(reader["Id"].ToString());
                         r.Stars = int.Parse(reader["Stars"].ToString());
                         r.MessageId = int.Parse(reader["MessageId"].ToString());
-                        r.UserId = int.Parse(reader["UserId"].ToString());
+                        r.UserId = (reader["UserId"] == DBNull.Value ? string.Empty : reader["UserId"].ToString());
+                        r.UserName = UserRepository.GetUser(r.UserId).UserName;
 
                         Ratings.Add(r);
                     }

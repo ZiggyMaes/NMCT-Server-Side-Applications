@@ -5,11 +5,26 @@ using System.Web;
 using System.Web.Mvc;
 using Presentation.Repositories;
 using Presentation.Models;
+using Microsoft.AspNet.Identity.Owin;
+using Microsoft.AspNet.Identity;
 
 namespace Presentation.Controllers
 {
     public class ForumController : Controller
     {
+        private ApplicationUserManager _userManager;
+
+        public ApplicationUserManager UserManager
+        {
+            get
+            {
+                return _userManager ?? HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
+            }
+            private set
+            {
+                _userManager = value;
+            }
+        }
         [HttpGet]
         [Authorize(Roles = "Administrator, Superuser, User")]
         public ActionResult Index(int? AreaId)
@@ -63,7 +78,7 @@ namespace Presentation.Controllers
             int ThreadId = 0;
 
             Thread.TimePosted = DateTime.Now;
-            Thread.UserId = 0; // ---------> MUST CHANGE!!!!!!!!!!!!!!!
+            Thread.UserInfo = UserRepository.GetUser(UserManager.FindById(User.Identity.GetUserId()).Id);
 
             ThreadId = ForumRepository.AddMessage(Thread);
             ForumRepository.UpdateParentId(ThreadId);//Update the ParentId value of the thread to match the Id (this is how we differentiate threads from posts)
@@ -85,7 +100,7 @@ namespace Presentation.Controllers
         {
             Comment.Title = "RE";
             Comment.TimePosted = DateTime.Now;
-            Comment.UserId = 0; // ---------> MUST CHANGE!!!!!!!!!!!!!!!
+            Comment.UserInfo = UserRepository.GetUser(UserManager.FindById(User.Identity.GetUserId()).Id);
 
             ForumRepository.AddMessage(Comment);
 

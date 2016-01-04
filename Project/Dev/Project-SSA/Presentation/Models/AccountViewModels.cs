@@ -8,6 +8,9 @@ namespace Presentation.Models
         [Required]
         [Display(Name = "Email")]
         public string Email { get; set; }
+        [Required]
+        [Display(Name = "Display name")]
+        public string UserName { get; set; }
     }
 
     public class ExternalLoginListViewModel
@@ -64,6 +67,9 @@ namespace Presentation.Models
 
     public class RegisterViewModel
     {
+        [Required]
+        [Display(Name = "Display name")]
+        public string UserName { get; set; }
         [Required]
         [EmailAddress]
         [Display(Name = "Email")]

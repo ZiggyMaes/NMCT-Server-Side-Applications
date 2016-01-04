@@ -6,12 +6,13 @@ using System.Threading.Tasks;
 
 namespace Presentation.Models
 {
-    public class Rating
+    public class User
     {
-        public int Id { get; set; }
-        public int Stars { get; set; }
-        public int MessageId { get; set; }
         public string UserId { get; set; }
         public string UserName { get; set; }
+        public string Email { get; set; }
+        public string Role { get; set; }
+        public int Area1 { get; set; }
+        public int Area2 { get; set; }
     }
 }

@@ -20,7 +20,7 @@ namespace Presentation.Models
         [DefaultValue(true)]
         public bool Visible { get; set; }
         public int AreaId { get; set; }
-        public int UserId { get; set; }
+        public User UserInfo { get; set; }
         public int PostCount { get; set; }
     }
 }
