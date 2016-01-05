@@ -27,9 +27,8 @@
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Hello @User.Identity.Name<b class="caret"></b></a>
                             <ul class="dropdown-menu">
-                                <li>
-                                    <a href="/Account/LogOff">Logout</a>
-                                </li>
+                                <li><a href="/Manage/ChangePassword">Change password</a></li>
+                                <li><a href="/Account/LogOff">Logout</a></li>
                             </ul>
                         </li>
                         <li>
@@ -37,8 +36,12 @@
                         </li>
                         if(User.IsInRole("Administrator"))
                         {
-                            <li>
-                                <a href="/Admin/Index">Administration</a>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Administration<b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="/Administration/Manage">Manage</a></li>
+                                    <li><a href="/Administration/Statistics">Statistics</a></li>
+                                </ul>
                             </li>
                         }
                     }

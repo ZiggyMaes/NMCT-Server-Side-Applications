@@ -1,0 +1,43 @@
+﻿@model IEnumerable<Presentation.Models.Statistic>
+
+@{
+    ViewBag.Title = "Statistics";
+    int i = 0;
+}
+
+<h2>Statistics</h2>
+
+<div class="container">
+    <div class="row">
+
+        @foreach (var m in Model)
+        {
+            if (i % 2 == 0)
+            {
+                <div class="col-lg-2 col-sm-6">
+                    <div class="circle-tile ">
+                        <div class="circle-tile-heading dark-blue"><i class="fa fa-info-circle fa-fw fa-3x"></i></div>
+                        <div class="circle-tile-content dark-blue">
+                            <div class="circle-tile-description text-faded"> @m.Title </div>
+                            <div class="circle-tile-number text-faded ">@m.Value</div>
+                        </div>
+                    </div>
+                </div>
+                i++;
+            }
+            else
+            {
+                <div class="col-lg-2 col-sm-6">
+                    <div class="circle-tile ">
+                        <div class="circle-tile-heading red"><i class="fa fa-info-circle fa-fw fa-3x"></i></div>
+                        <div class="circle-tile-content red">
+                            <div class="circle-tile-description text-faded"> @m.Title </div>
+                            <div class="circle-tile-number text-faded ">@m.Value</div>
+                        </div>
+                    </div>
+                </div>
+                i++;
+            }
+        }
+    </div>
+</div>

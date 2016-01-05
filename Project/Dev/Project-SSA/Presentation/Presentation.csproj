@@ -198,10 +198,12 @@
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Message.cs" />
     <Compile Include="Models\Rating.cs" />
+    <Compile Include="Models\Statistic.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\AreaRepository.cs" />
     <Compile Include="Repositories\ForumRepository.cs" />
+    <Compile Include="Repositories\StatisticRepository.cs" />
     <Compile Include="Repositories\UserRepository.cs" />
     <Compile Include="Settings\AppSettings.cs" />
     <Compile Include="Startup.cs" />
@@ -247,6 +249,7 @@
     <Content Include="Views\Area\Select.cshtml" />
     <Content Include="Views\Forum\SearchResults.cshtml" />
     <Content Include="Views\Error\ForbiddenAction.cshtml" />
+    <Content Include="Views\Administration\Statistics.cshtml" />
     <None Include="Views\Home\Index.cshtml">
       <BrowseToURL>~/Home/Index</BrowseToURL>
     </None>
@@ -278,8 +281,6 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\About.cshtml" />
-    <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />
     <Content Include="Views\Account\ConfirmEmail.cshtml" />
     <Content Include="Views\Account\ExternalLoginConfirmation.cshtml" />
@@ -308,8 +309,6 @@
     <Folder Include="Content\Images\Areas\Civil\" />
     <Folder Include="Content\Images\Areas\Military\" />
     <Folder Include="Content\Images\ratings\" />
-    <Folder Include="Views\Administration\" />
-    <Folder Include="Views\ForumAPI\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

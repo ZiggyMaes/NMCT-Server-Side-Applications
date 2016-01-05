@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNet.Identity.Owin;
+using Presentation.Models;
+using Presentation.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,10 +28,18 @@ namespace Presentation.Controllers
         [Authorize(Roles = "Administrator")]
         public ActionResult Statistics()
         {
-            return View();
+            List<Statistic> Statistics = new List<Statistic>();
+
+            Statistics.Add(new Statistic("New Threads (24h)", StatisticRepository.GetNewThreadCount().ToString()));
+            Statistics.Add(new Statistic("New Posts (24h)", StatisticRepository.GetNewPostCount().ToString()));
+            Statistics.Add(new Statistic("Total Threadcount", StatisticRepository.GetTotalThreadCount().ToString()));
+            Statistics.Add(new Statistic("Total Postcount", StatisticRepository.GetTotalPostCount().ToString()));
+
+
+            return View(Statistics);
         }
 
-        public ActionResult UserManagement()
+        public ActionResult Management()
         {
             return View();
         }
