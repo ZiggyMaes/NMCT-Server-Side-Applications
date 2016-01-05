@@ -29,7 +29,7 @@
                     <tr>
                         <td class="text-center"><i class="fa fa-envelope-o fa-2x text-primary"></i></td>
                         <td>
-                            <h4><a href="ViewThread?ThreadId=@m.ParentId">@m.Title</a></h4>
+                            <h4><a href="ViewThread?ThreadId=@(m.ParentId)#@m.Id">@m.Title</a></h4>
                         </td>
                         <td class="text-center hidden-xs hidden-sm">STARS</td>
                         <td class="text-center hidden-xs hidden-sm">@m.PostCount</td>

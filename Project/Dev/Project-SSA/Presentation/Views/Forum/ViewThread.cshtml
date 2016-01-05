@@ -9,8 +9,8 @@
     <ul class="media-list forum">
         @foreach (var m in Model)
         {
-            <li class="media well">
-                <div class="pull-left user-info" href="#">
+            <li class="media well" id="@m.Id">
+                <div class="pull-left user-info">
                     <img class="avatar img-circle img-thumbnail" src="http://snipplicious.com/images/guest.png" width="64" alt="Generic placeholder image">
                     <strong><a href="user.html">@m.UserInfo.DisplayName</a></strong>
                     <small>@m.UserInfo.Role</small>
