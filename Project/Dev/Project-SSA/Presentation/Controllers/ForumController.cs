@@ -57,7 +57,7 @@ namespace Presentation.Controllers
         }
         [HttpPost]
         [Authorize(Roles = "Administrator, Superuser, User")]
-        public ActionResult ViewThread(Message Comment)
+        public ActionResult ViewThread(Message Comment, string Title)
         {
             return PostComment(Comment);
         }
@@ -86,14 +86,16 @@ namespace Presentation.Controllers
             ThreadId = ForumRepository.AddMessage(Thread);
             ForumRepository.UpdateParentId(ThreadId);//Update the ParentId value of the thread to match the Id (this is how we differentiate threads from posts)
 
-            return RedirectToAction("ViewThread", new { ThreadId = ThreadId });
+            return RedirectToAction("ViewThread", new { ThreadId = ThreadId, Title = Thread.Title });
         }
         
         [HttpGet]
         [Authorize(Roles = "Administrator, Superuser, User")]
-        public ActionResult PostComment(int? ThreadId)
+        public ActionResult PostComment(int? ThreadId, string Title, string AreaId)
         {
             ViewBag.ThreadId = Convert.ToInt32(ThreadId);
+            ViewBag.Title = Title;
+            ViewBag.AreaId = AreaId;
             return View();
         }
 
@@ -101,7 +103,7 @@ namespace Presentation.Controllers
         [Authorize(Roles = "Administrator, Superuser, User")]
         public ActionResult PostComment(Message Comment)
         {
-            Comment.Title = "RE";
+            Comment.Title = "RE: " + Comment.Title;
             Comment.TimePosted = DateTime.Now;
             Comment.UserInfo = UserRepository.GetUser(UserManager.FindByEmail(User.Identity.Name).Id);
 
@@ -110,6 +112,21 @@ namespace Presentation.Controllers
             if (ForumRepository.GetPostcount(Comment.UserInfo.UserId) == 5) UserRepository.SetRole(Comment.UserInfo.UserId, 2);
 
             return RedirectToAction("ViewThread", new { ThreadId = Comment.ParentId });
+        }
+        [HttpPost]
+        [Authorize(Roles = "Administrator, Superuser, User")]
+        public ActionResult Search(string AreaId, string Query)
+        {
+            List<Message> Results = ForumRepository.Search(Convert.ToInt32(AreaId), Query);
+
+            ViewBag.CurrentAreaId = AreaId;
+            return View("SearchResults", Results); 
+        }
+        [HttpGet]
+        [Authorize(Roles = "Administrator, Superuser, User")]
+        public ActionResult SearchResults()
+        {
+            return View();
         }
     }
 }

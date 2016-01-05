@@ -10,6 +10,8 @@
         <h4>Comment on this discussion...</h4>
         <hr />
         <input type="hidden" name="ParentId" value="@ViewBag.ThreadId" />
+        <input type="hidden" name="Title" value="@ViewBag.Title" />
+        <input type="hidden" name="AreaId" value="@ViewBag.AreaId" />
 
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 

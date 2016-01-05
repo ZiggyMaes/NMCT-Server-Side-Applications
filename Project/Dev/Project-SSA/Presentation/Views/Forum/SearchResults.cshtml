@@ -7,8 +7,7 @@
 
 <div class="container" style="margin-top: 35px">
     <div class="page-header page-heading">
-        <h1>Forum</h1>
-        <h3>Discussions about @ViewBag.CurrentArea</h3>
+        <h1>Search results</h1>
     </div>
 
     <table class="table forum table-striped">
@@ -30,7 +29,7 @@
                     <tr>
                         <td class="text-center"><i class="fa fa-envelope-o fa-2x text-primary"></i></td>
                         <td>
-                            <h4><a href="ViewThread?ThreadId=@m.Id">@m.Title</a></h4>
+                            <h4><a href="ViewThread?ThreadId=@m.ParentId">@m.Title</a></h4>
                         </td>
                         <td class="text-center hidden-xs hidden-sm">STARS</td>
                         <td class="text-center hidden-xs hidden-sm">@m.PostCount</td>
@@ -40,14 +39,5 @@
             }
         </tbody>
     </table>
-    <form class="navbar-form navbar-left" method="post" action="Search" role="search">
-        <div class="form-group">
-            <div class="input-group">
-                <span class="input-group-addon"><i class="fa fa-search"></i></span>
-                <input type="hidden" name="AreaId" value="@ViewBag.CurrentAreaId" />
-                <input type="text" name="Query" class="form-control" placeholder="Search for something">      
-            </div>
-        </div>
-    </form>
-    <a href="NewThread?AreaId=@ViewBag.CurrentAreaId" class="btn btn-primary pull-right" role="button">New thread</a>
+    <a href="Index?AreaId=@ViewBag.CurrentAreaId" class="btn btn-primary pull-right" role="button">Return</a>
 </div>

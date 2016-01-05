@@ -33,6 +33,6 @@
         }
     </ul>
 
-    @Html.Action("PostComment", "Forum", new { ThreadId = Model.First().Id })
+    @Html.Action("PostComment", "Forum", new { ThreadId = Model.First().Id, Title = Model.First().Title, AreaId = Model.First().AreaId })
 
 </div>

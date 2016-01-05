@@ -278,5 +278,45 @@ namespace Presentation.Repositories
             }
             return Ratings;
         }
+        public static List<Message> Search(int AreaId, string Query)
+        {
+            List<Message> Threads = new List<Message>();
+
+            using (SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString))
+            {
+                con.Open();
+
+                using (SqlCommand cmd = new SqlCommand())
+                {
+                    cmd.Connection = con;
+                    cmd.CommandText = "SELECT Id, Title, Body, TimePosted, ParentId, Visible, AreaId, UserId FROM dbo.Message WHERE AreaId = @AreaId AND Body LIKE @Query";
+
+                    cmd.Parameters.AddWithValue("AreaId", AreaId);
+                    cmd.Parameters.AddWithValue("Query", "%" + Query + "%");
+
+                    SqlDataReader reader = cmd.ExecuteReader();
+                    if (!reader.HasRows) return null;
+                    while (reader.Read())
+                    {
+                        Message m = new Message();
+
+                        m.Id = int.Parse(reader["Id"].ToString());
+                        m.Title = (reader["Title"] == DBNull.Value ? string.Empty : reader["Title"].ToString());
+                        m.Body = (reader["Body"] == DBNull.Value ? string.Empty : reader["Body"].ToString());
+                        m.TimePosted = (reader["TimePosted"] == DBNull.Value ? DateTime.Now : DateTime.Parse(reader["TimePosted"].ToString()));
+                        m.ParentId = int.Parse(reader["ParentId"].ToString());
+                        m.Visible = bool.Parse(reader["Visible"].ToString());
+                        m.AreaId = int.Parse(reader["AreaId"].ToString());
+                        m.UserInfo = UserRepository.GetUser((reader["UserId"] == DBNull.Value ? string.Empty : reader["UserId"].ToString()));
+                        m.PostCount = GetPostcount(int.Parse(reader["Id"].ToString()));
+
+                        Threads.Add(m);
+                    }
+                }
+                con.Close();
+            }
+
+            return Threads;
+        }
     }
 }
