@@ -35,7 +35,7 @@ namespace Presentation.Controllers
             if (CurrentArea == null) return RedirectToAction("Index", "Home"); //if no records were returned
 
             User CurrentUser = UserRepository.GetUser(UserManager.FindByEmail(User.Identity.Name).Id);
-            if (CurrentUser.Area1 != AreaId && CurrentUser.Area2 != AreaId) return RedirectToAction("Select");
+            if (CurrentUser.Area1 != AreaId && CurrentUser.Area2 != AreaId && !User.IsInRole("Administrator")) return RedirectToAction("Select");
 
             return View(CurrentArea);
         }
