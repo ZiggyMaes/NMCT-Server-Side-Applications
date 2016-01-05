@@ -29,7 +29,7 @@ namespace Presentation.Controllers
         [Authorize(Roles = "Administrator, Superuser, User")]
         public ActionResult Index(int? AreaId)
         {
-            if (AreaId == null) return RedirectToAction("Index", "Home");
+            if (AreaId == null || !ModelState.IsValid) return RedirectToAction("ForbiddenAction", "Error");
 
             Area CurrentArea = AreaRepository.GetAreaInfo(Convert.ToInt32(AreaId));
             if (CurrentArea == null) return RedirectToAction("Index", "Home"); //if no records were returned
@@ -44,6 +44,8 @@ namespace Presentation.Controllers
         [Authorize(Roles = "Administrator, Superuser, User")]
         public ActionResult Select()
         {
+            if (!ModelState.IsValid) return RedirectToAction("ForbiddenAction", "Error");
+
             List<Area> Areas = AreaRepository.GetAreas();
 
             User CurrentUser = UserRepository.GetUser(UserManager.FindByEmail(User.Identity.Name).Id);
@@ -57,6 +59,8 @@ namespace Presentation.Controllers
         [Authorize(Roles = "Administrator, Superuser, User")]
         public ActionResult Select(String[] Areas)
         {
+            if (!ModelState.IsValid) return RedirectToAction("ForbiddenAction", "Error");
+
             int[] ReturnAreas = new int[2];
 
             if (Areas == null)

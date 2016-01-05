@@ -246,6 +246,7 @@
     <Content Include="Views\Error\AccessDenied.cshtml" />
     <Content Include="Views\Area\Select.cshtml" />
     <Content Include="Views\Forum\SearchResults.cshtml" />
+    <Content Include="Views\Error\ForbiddenAction.cshtml" />
     <None Include="Views\Home\Index.cshtml">
       <BrowseToURL>~/Home/Index</BrowseToURL>
     </None>

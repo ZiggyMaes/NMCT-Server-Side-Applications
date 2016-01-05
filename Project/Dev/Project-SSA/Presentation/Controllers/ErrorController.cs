@@ -13,5 +13,9 @@ namespace Presentation.Controllers
         {
             return View();
         }
+        public ActionResult ForbiddenAction()
+        {
+            return View();
+        }
     }
 }

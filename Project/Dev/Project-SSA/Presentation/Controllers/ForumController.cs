@@ -29,7 +29,7 @@ namespace Presentation.Controllers
         [Authorize(Roles = "Administrator, Superuser, User")]
         public ActionResult Index(int? AreaId)
         {
-            if (AreaId == null) return RedirectToAction("Index", "Home");
+            if (AreaId == null || !ModelState.IsValid) return RedirectToAction("ForbiddenAction", "Error");
 
             Area CurrentArea = AreaRepository.GetAreaInfo(Convert.ToInt32(AreaId));
             if (CurrentArea == null) return RedirectToAction("Index", "Home"); //if no records were returned
@@ -48,7 +48,7 @@ namespace Presentation.Controllers
         [Authorize(Roles = "Administrator, Superuser, User")]
         public ActionResult ViewThread(int? ThreadId)
         {
-            if (ThreadId == null) return RedirectToAction("Index", "Home");
+            if (ThreadId == null || !ModelState.IsValid) return RedirectToAction("ForbiddenAction", "Error");
 
             List<Message> Messages = ForumRepository.GetMessages(Convert.ToInt32(ThreadId));
             if (Messages == null) return RedirectToAction("Index", "Home");
@@ -64,7 +64,7 @@ namespace Presentation.Controllers
         [HttpGet]
         public ActionResult NewThread(int? AreaId)
         {
-            if (AreaId == null) return RedirectToAction("Index", "Home");
+            if (AreaId == null || !ModelState.IsValid) return RedirectToAction("ForbiddenAction", "Error");
             if (!User.IsInRole("Superuser") && !User.IsInRole("Administrator")) return RedirectToAction("AccessDenied", "Error");
 
             Area CurrentArea = AreaRepository.GetAreaInfo(Convert.ToInt32(AreaId));
@@ -77,7 +77,8 @@ namespace Presentation.Controllers
         [HttpPost]
         public ActionResult NewThread(Message Thread)
         {
-            if (!User.IsInRole("Superuser") && !User.IsInRole("Administrator")) return View("FaultyRole");
+            if (Thread == null || !ModelState.IsValid) return RedirectToAction("ForbiddenAction", "Error");
+            if (!User.IsInRole("Superuser") && !User.IsInRole("Administrator")) return RedirectToAction("AccessDenied", "Error");
             int ThreadId = 0;
 
             Thread.TimePosted = DateTime.Now;
@@ -93,6 +94,7 @@ namespace Presentation.Controllers
         [Authorize(Roles = "Administrator, Superuser, User")]
         public ActionResult PostComment(int? ThreadId, string Title, string AreaId)
         {
+            if (ThreadId == null || !ModelState.IsValid) return RedirectToAction("ForbiddenAction", "Error");
             ViewBag.ThreadId = Convert.ToInt32(ThreadId);
             ViewBag.Title = Title;
             ViewBag.AreaId = AreaId;
@@ -103,6 +105,7 @@ namespace Presentation.Controllers
         [Authorize(Roles = "Administrator, Superuser, User")]
         public ActionResult PostComment(Message Comment)
         {
+            if (Comment == null || !ModelState.IsValid) return RedirectToAction("ForbiddenAction", "Error");
             Comment.Title = "RE: " + Comment.Title;
             Comment.TimePosted = DateTime.Now;
             Comment.UserInfo = UserRepository.GetUser(UserManager.FindByEmail(User.Identity.Name).Id);
@@ -117,6 +120,7 @@ namespace Presentation.Controllers
         [Authorize(Roles = "Administrator, Superuser, User")]
         public ActionResult Search(string AreaId, string Query)
         {
+            if (AreaId == null || !ModelState.IsValid) return RedirectToAction("ForbiddenAction", "Error");
             List<Message> Results = ForumRepository.Search(Convert.ToInt32(AreaId), Query);
 
             ViewBag.CurrentAreaId = AreaId;
@@ -126,6 +130,7 @@ namespace Presentation.Controllers
         [Authorize(Roles = "Administrator, Superuser, User")]
         public ActionResult SearchResults(List<Message> Results)
         {
+            if (!ModelState.IsValid) return RedirectToAction("ForbiddenAction", "Error");
             return View(Results);
         }
 
@@ -133,6 +138,7 @@ namespace Presentation.Controllers
         [Authorize(Roles = "Administrator")]
         public ActionResult HideThread(int? ThreadId, int? AreaId)
         {
+            if (ThreadId == null || AreaId == null || !ModelState.IsValid) return RedirectToAction("ForbiddenAction", "Error");
             ForumRepository.HideMessage(Convert.ToInt32(ThreadId));
             return RedirectToAction("Index", "Forum", new { AreaId = AreaId });
         }
@@ -141,9 +147,9 @@ namespace Presentation.Controllers
         [Authorize(Roles = "Administrator")]
         public ActionResult HideMessage(int? MessageId, int? ThreadId)
         {
+            if (MessageId == null || ThreadId == null || !ModelState.IsValid) return RedirectToAction("ForbiddenAction", "Error");
             ForumRepository.HideMessage(Convert.ToInt32(MessageId));
             return RedirectToAction("ViewThread", "Forum", new { ThreadId = ThreadId });
         }
-
     }
 }
