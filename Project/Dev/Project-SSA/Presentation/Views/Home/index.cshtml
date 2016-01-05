@@ -56,16 +56,18 @@
     </div>
 </div>
 
-<hr>
 
-<!-- Call to Action Section -->
-<div class="well">
-    <div class="row">
-        <div class="col-md-8">
-            <p>You need to authenticate before you can access the areas above. Registration will grant you access to a maximum of 2 areas simultaneously. You can always change this.</p>
-        </div>
-        <div class="col-md-4">
-            <a class="btn btn-lg btn-default btn-block" href="/Account/Login">Proceed to login</a>
+@if (!User.Identity.IsAuthenticated)
+{
+    <hr>
+    <div class="well">
+        <div class="row">
+            <div class="col-md-8">
+                <p>You need to authenticate before you can access the areas above. Registration will grant you access to a maximum of 2 areas simultaneously. You can always change this.</p>
+            </div>
+            <div class="col-md-4">
+                <a class="btn btn-lg btn-default btn-block" href="/Account/Login">Proceed to login</a>
+            </div>
         </div>
     </div>
-</div>
+}

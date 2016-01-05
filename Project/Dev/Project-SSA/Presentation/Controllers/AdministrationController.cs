@@ -39,9 +39,18 @@ namespace Presentation.Controllers
             return View(Statistics);
         }
 
-        public ActionResult Management()
+        [HttpGet]
+        [Authorize(Roles = "Administrator")]
+        public ActionResult Manage()
         {
             return View();
+        }
+        [HttpGet]
+        [Authorize(Roles = "Administrator")]
+        public ActionResult PurgeOldUsers()
+        {
+            //AdministrationRepository.PurgeUsers(); /* Was not able to implement in time */
+            return RedirectToAction("Manage");
         }
     }
 }

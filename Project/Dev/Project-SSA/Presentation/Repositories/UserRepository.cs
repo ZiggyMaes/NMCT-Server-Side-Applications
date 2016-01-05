@@ -50,7 +50,7 @@ namespace Presentation.Repositories
                 using (SqlCommand cmd = new SqlCommand())
                 {
                     cmd.Connection = con;
-                    cmd.CommandText = "UPDATE dbo.AspNetUsers SET LockoutEndDateUtc = '2999-12-31' WHERE UserId = @UserId; ";
+                    cmd.CommandText = "UPDATE dbo.AspNetUsers SET LockoutEndDateUtc = '2999-12-31' WHERE UserId = @UserId;";
                     cmd.Parameters.AddWithValue("UserId", UserId);
 
                     cmd.ExecuteNonQuery();

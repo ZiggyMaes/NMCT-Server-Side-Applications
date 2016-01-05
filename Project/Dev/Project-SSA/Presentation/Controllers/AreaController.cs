@@ -81,7 +81,7 @@ namespace Presentation.Controllers
 
             AreaRepository.UpdateUserAreas(UserManager.FindByEmail(User.Identity.Name).Id, ReturnAreas);
             List<Area> UpdatedAreas = AreaRepository.GetAreas();
-            return RedirectToAction("Select", UpdatedAreas);
+            return RedirectToAction("Index", "Home");
         }
     }
 }

@@ -197,7 +197,8 @@ header.carousel .fill {
 .text-faded {
     color: rgba(255, 255, 255, 0.7);
 }
-
+body { padding-top:20px; }
+.panel-body .btn:not(.btn-block) { width:120px;margin-bottom:10px; }
 
 
 /* Footer Styles */
