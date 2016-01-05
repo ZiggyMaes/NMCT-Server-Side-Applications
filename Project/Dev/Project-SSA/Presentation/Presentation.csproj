@@ -303,6 +303,10 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Content\Images\Areas\Airshows\" />
+    <Folder Include="Content\Images\Areas\Cargo\" />
+    <Folder Include="Content\Images\Areas\Civil\" />
+    <Folder Include="Content\Images\Areas\Military\" />
     <Folder Include="Content\Images\ratings\" />
     <Folder Include="Views\Administration\" />
     <Folder Include="Views\ForumAPI\" />

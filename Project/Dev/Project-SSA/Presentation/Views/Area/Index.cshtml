@@ -3,24 +3,52 @@
 @Html.AntiForgeryToken()
 
 @{
-    ViewBag.Title = Model.Title;
+    string[] Photographs = new string[8];
 }
 
 <h2>@Model.Title</h2>
+<p>More content, including news, events and interviews, coming over the next few weeks!</p>
 
-@*@Model.Description*@
-<p>
-    Deze pagina is dynamisch. @*@Model.Description*@ is een database kolom en object property die de HTML zal bevatten voor deze pagina in te laden.
-    Hier: per gebied enkele URLs naar foto's die leuk zijn (een vijftal? weet nog niet goed hoe ik ze wal weergeven)
-    Hier: algemene informatie over het interesse gebied. Interessante weetjes? Nieuws? Uhm...
+@switch (Model.Id)
+{
+    case 0:
+        for (int i = 0; i < 8; i++)
+        {
+            Photographs[i] = "../Content/Images/Areas/Civil/" + i + ".jpg";
+        }
+        break;
+    case 1:
+        for (int i = 0; i < 8; i++)
+        {
+            Photographs[i] = "../Content/Images/Areas/Cargo/" + i + ".jpg";
+        }
+        break;
+    case 2:
+        for (int i = 0; i < 8; i++)
+        {
+            Photographs[i] = "../Content/Images/Areas/Military/" + i + ".jpg";
+        }
+        break;
+    case 3:
+        for (int i = 0; i < 8; i++)
+        {
+            Photographs[i] = "../Content/Images/Areas/Airshows/" + i + ".jpg";
+        }
+        break;
+    default:
+        break;
+}
+<div class="container-fluid">
+    <div class="row portfolio">
+        @for (int i = 0; i < 8; i++)
+        {
+            <div class="col-sm-3">
+                <div class="thumbnail">
+                    <img class="img-responsive" src="@Photographs[i]">
+                </div>
+            </div>
+        }
 
-    -> hmmm... niet erg duidelijk wat dit moet worden! ik neem aan dat dit dus per area zal verschijnen onder https://gyazo.com/e805ffbb3123c39c3e3dc0b0cd654037
-
-    Civil aviation
-    Air cargo
-    Military aviation
-    air show
-
-</p>
-
-<a href="/Forum/Index?AreaId=@Model.Id" class="btn btn-info btn-block" role="button">Hier: call to action om door te gaan naar het forum van het interessegebied</a>
+    </div>
+</div>
+<a href="/Forum/Index?AreaId=@Model.Id" class="btn btn-info btn-block" role="button">Join us on the forum!</a>

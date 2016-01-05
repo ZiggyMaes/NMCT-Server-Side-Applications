@@ -66,6 +66,22 @@ header.carousel .fill {
     display: block;
     font-style: italic;
 }
+.portfolio .thumbnail {
+    position: relative;
+}
+
+.portfolio .thumbnail:hover {
+    cursor: pointer;
+}
+
+.portfolio .caption {
+    bottom: 0;
+    position: absolute;
+}
+
+.portfolio .btn {
+    opacity: 0.75;
+}
 
 /* Footer Styles */
 
