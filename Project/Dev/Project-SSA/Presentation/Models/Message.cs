@@ -12,8 +12,12 @@ namespace Presentation.Models
     {
         public int Id { get; set; }
         [Required(ErrorMessage = "Title is required")]
+        [MaxLength(50)]
         public string Title { get; set; }
-        [Required(ErrorMessage = "Content is required"), Display(Name = "Content"), DataType(DataType.MultilineText)]
+        [Required(ErrorMessage = "Content is required")]
+        [Display(Name = "Content")]
+        [DataType(DataType.MultilineText)]
+        [MaxLength(1000)]
         public string Body { get; set; }
         public DateTime TimePosted { get; set; }
         public int ParentId { get; set; }
