@@ -109,7 +109,7 @@ namespace Presentation.Controllers
 
             ForumRepository.AddMessage(Comment);
 
-            if (ForumRepository.GetPostcount(Comment.UserInfo.UserId) == 5) UserRepository.SetRole(Comment.UserInfo.UserId, 2);
+            if (!User.IsInRole("Administrator") && ForumRepository.GetPostcount(Comment.UserInfo.UserId) == 5) UserRepository.SetRole(Comment.UserInfo.UserId, 2);
 
             return RedirectToAction("ViewThread", new { ThreadId = Comment.ParentId });
         }
@@ -124,9 +124,26 @@ namespace Presentation.Controllers
         }
         [HttpGet]
         [Authorize(Roles = "Administrator, Superuser, User")]
-        public ActionResult SearchResults()
+        public ActionResult SearchResults(List<Message> Results)
         {
-            return View();
+            return View(Results);
         }
+
+        [HttpGet]
+        [Authorize(Roles = "Administrator")]
+        public ActionResult HideThread(int? ThreadId, int? AreaId)
+        {
+            ForumRepository.HideMessage(Convert.ToInt32(ThreadId));
+            return RedirectToAction("Index", "Forum", new { AreaId = AreaId });
+        }
+
+        [HttpGet]
+        [Authorize(Roles = "Administrator")]
+        public ActionResult HideMessage(int? MessageId, int? ThreadId)
+        {
+            ForumRepository.HideMessage(Convert.ToInt32(MessageId));
+            return RedirectToAction("ViewThread", "Forum", new { ThreadId = ThreadId });
+        }
+
     }
 }

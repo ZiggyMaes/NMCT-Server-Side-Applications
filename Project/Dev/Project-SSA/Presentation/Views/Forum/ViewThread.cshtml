@@ -26,6 +26,10 @@
                 <div class="media-body">
                     <div class="forum-post-panel col-sm-12">
                         <i class="fa fa-clock-o col-sm-12"> Posted @m.TimePosted.ToString("f")</i>
+                        @if (User.IsInRole("Administrator"))
+                        {
+                            <a href="/Forum/HideMessage?MessageId=@(m.Id)&ThreadId=@m.ParentId"><i class="fa fa-trash-o"></i></a>
+                        }   
                     </div>
                     <p>@m.Body</p>
                 </div>

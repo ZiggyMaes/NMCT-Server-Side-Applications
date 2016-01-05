@@ -24,7 +24,7 @@ namespace Presentation.Repositories
                 using (SqlCommand cmd = new SqlCommand())
                 {
                     cmd.Connection = con;
-                    cmd.CommandText = "SELECT Id, Title, Body, TimePosted, ParentId, Visible, AreaId, UserId FROM dbo.Message WHERE Id = @MessageId";
+                    cmd.CommandText = "SELECT Id, Title, Body, TimePosted, ParentId, Visible, AreaId, UserId FROM dbo.Message WHERE Id = @MessageId AND Visible = 1";
                     cmd.Parameters.AddWithValue("MessageId", MessageId);
 
                     SqlDataReader reader = cmd.ExecuteReader();
@@ -56,7 +56,7 @@ namespace Presentation.Repositories
                 using (SqlCommand cmd = new SqlCommand())
                 {
                     cmd.Connection = con;
-                    cmd.CommandText = "SELECT Id, Title, Body, TimePosted, ParentId, Visible, AreaId, UserId FROM dbo.Message WHERE ParentId = @ThreadId";
+                    cmd.CommandText = "SELECT Id, Title, Body, TimePosted, ParentId, Visible, AreaId, UserId FROM dbo.Message WHERE ParentId = @ThreadId AND Visible = 1";
                     cmd.Parameters.AddWithValue("ThreadId", ThreadId);
 
                     SqlDataReader reader = cmd.ExecuteReader();
@@ -93,7 +93,7 @@ namespace Presentation.Repositories
                 using (SqlCommand cmd = new SqlCommand())
                 {
                     cmd.Connection = con;
-                    cmd.CommandText = "SELECT Id, Title, Body, TimePosted, ParentId, Visible, AreaId, UserId FROM dbo.Message WHERE AreaId = @AreaId AND Id = ParentId";
+                    cmd.CommandText = "SELECT Id, Title, Body, TimePosted, ParentId, Visible, AreaId, UserId FROM dbo.Message WHERE AreaId = @AreaId AND Id = ParentId AND Visible = 1";
 
                     cmd.Parameters.AddWithValue("AreaId", AreaId);
 
@@ -132,7 +132,7 @@ namespace Presentation.Repositories
                 using (SqlCommand cmd = new SqlCommand())
                 {
                     cmd.Connection = con;
-                    cmd.CommandText = "SELECT COUNT(ParentId) FROM dbo.Message WHERE ParentId = @ThreadId";
+                    cmd.CommandText = "SELECT COUNT(ParentId) FROM dbo.Message WHERE ParentId = @ThreadId AND Visible = 1";
                     cmd.Parameters.AddWithValue("ThreadId", ThreadId);
 
                     posts = Convert.ToInt32(cmd.ExecuteScalar()) - 1;//Thread headline does not count as post (even though it is a post)
@@ -152,7 +152,7 @@ namespace Presentation.Repositories
                 using (SqlCommand cmd = new SqlCommand())
                 {
                     cmd.Connection = con;
-                    cmd.CommandText = "SELECT COUNT(ParentId) FROM dbo.Message WHERE UserId = @UserId";
+                    cmd.CommandText = "SELECT COUNT(ParentId) FROM dbo.Message WHERE UserId = @UserId And Visible = 1";
                     cmd.Parameters.AddWithValue("UserId", UserId);
 
                     posts = Convert.ToInt32(cmd.ExecuteScalar());
@@ -289,7 +289,7 @@ namespace Presentation.Repositories
                 using (SqlCommand cmd = new SqlCommand())
                 {
                     cmd.Connection = con;
-                    cmd.CommandText = "SELECT Id, Title, Body, TimePosted, ParentId, Visible, AreaId, UserId FROM dbo.Message WHERE AreaId = @AreaId AND Body LIKE @Query";
+                    cmd.CommandText = "SELECT Id, Title, Body, TimePosted, ParentId, Visible, AreaId, UserId FROM dbo.Message WHERE AreaId = @AreaId AND Visible = 1 AND Body LIKE @Query";
 
                     cmd.Parameters.AddWithValue("AreaId", AreaId);
                     cmd.Parameters.AddWithValue("Query", "%" + Query + "%");

@@ -19,6 +19,11 @@
                 <th class="cell-stat text-center hidden-xs hidden-sm">Rating</th>
                 <th class="cell-stat text-center hidden-xs hidden-sm">Posts</th>
                 <th class="cell-stat-2x hidden-xs hidden-sm">Last Post</th>
+                
+                @if (User.IsInRole("Administrator"))
+                {
+                    <th class="cell-stat text-center hidden-xs hidden-sm">Remove</th>
+                }
             </tr>
         </thead>
         <tbody>
@@ -30,11 +35,15 @@
                     <tr>
                         <td class="text-center"><i class="fa fa-envelope-o fa-2x text-primary"></i></td>
                         <td>
-                            <h4><a href="ViewThread?ThreadId=@m.Id">@m.Title</a></h4>
+                            <h4><a href="/Forum/ViewThread?ThreadId=@m.Id">@m.Title</a></h4>
                         </td>
                         <td class="text-center hidden-xs hidden-sm">STARS</td>
                         <td class="text-center hidden-xs hidden-sm">@m.PostCount</td>
-                        <td class="hidden-xs hidden-sm">by @m.UserInfo.DisplayName<br><small><i class="fa fa-clock-o"></i>@m.TimePosted.ToShortDateString()</small></td>
+                        <td class="hidden-xs hidden-sm">by @m.UserInfo.DisplayName<br><small><i class="fa fa-clock-o"></i> @m.TimePosted.ToShortDateString()</small></td>
+                        @if (User.IsInRole("Administrator"))
+                        {
+                            <td class="text-center hidden-xs hidden-sm"><a href="/Forum/HideThread?ThreadId=@(m.Id)&AreaId=@ViewBag.CurrentAreaId"><i class="fa fa-trash-o"></i></a></td>
+                        }
                     </tr>
                 }
             }
