@@ -1,0 +1,38 @@
+﻿@model IEnumerable<Presentation.Models.Area>
+
+@{
+    ViewBag.Title = "Select areas";
+}
+
+<h2>Select up to two interest areas you'd like access to</h2>
+
+<div class="col-md-12">
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div class="funkyradio col-md-12">
+        @foreach (var a in Model)
+        {
+            if (ViewBag.Area1 == a.Id || ViewBag.Area2 == a.Id)
+            {
+                <div class="funkyradio-primary form-group">
+                    <input type="checkbox" name="Areas[]" id="@a.Id" value="@a.Id" checked />
+                    <label for="@a.Id">@a.Title</label>
+                </div>
+            }
+            else
+            {
+                <div class="funkyradio-primary form-group">
+                    <input type="checkbox" name="Areas[]" id="@a.Id" value="@a.Id" />
+                    <label for="@a.Id">@a.Title</label>
+                </div>
+            }
+        }
+    </div>
+    <div class="form-group">
+        <div class="col-md-12">
+            <input type="submit" value="Submit" class="btn btn-primary pull-left" />
+        </div>
+    </div>
+}
+</div>

@@ -34,6 +34,9 @@ namespace Presentation.Controllers
             Area CurrentArea = AreaRepository.GetAreaInfo(Convert.ToInt32(AreaId));
             if (CurrentArea == null) return RedirectToAction("Index", "Home"); //if no records were returned
 
+            User CurrentUser = UserRepository.GetUser(UserManager.FindByEmail(User.Identity.Name).Id);
+            if (CurrentUser.Area1 != AreaId && CurrentUser.Area2 != AreaId) return RedirectToAction("Select", "Area");
+
             List<Message> Threads = ForumRepository.GetThreads(Convert.ToInt32(AreaId));
 
             ViewBag.CurrentArea = CurrentArea.Title;

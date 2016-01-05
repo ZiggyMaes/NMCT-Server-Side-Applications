@@ -128,7 +128,6 @@ namespace Presentation
     {
         public ApplicationRoleManager(IRoleStore<IdentityRole, string> store) : base(store)
         {
-
         }
         public static ApplicationRoleManager Create(IdentityFactoryOptions<ApplicationRoleManager> options, IOwinContext context)
         {

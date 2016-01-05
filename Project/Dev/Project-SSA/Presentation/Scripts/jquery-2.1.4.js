@@ -9227,3 +9227,13 @@ $(document).ready(function () {
         });
     });
 });
+
+$("input[type=checkbox]").click(function () {
+    var countchecked = $("input[type=checkbox]:checked").length;
+    if (countchecked >= 2) {
+        $('input[type=checkbox]').not(':checked').attr("disabled", true);
+    }
+    else {
+        $('input[type=checkbox]').not(':checked').attr("disabled", false);
+    }
+});

@@ -22,7 +22,7 @@ namespace Presentation.Repositories
                 using (SqlCommand cmd = new SqlCommand())
                 {
                     cmd.Connection = con;
-                    cmd.CommandText = "SELECT u.Id, u.DisplayName, u.Email, r.Name FROM dbo.AspNetUsers as u INNER JOIN dbo.AspNetUserRoles as ur ON u.Id = ur.UserId INNER JOIN dbo.AspNetRoles as r ON ur.RoleId = r.Id WHERE u.Id = @UserId";
+                    cmd.CommandText = "SELECT u.Id, u.DisplayName, u.Area1, u.Area2, u.Email, r.Name FROM dbo.AspNetUsers as u INNER JOIN dbo.AspNetUserRoles as ur ON u.Id = ur.UserId INNER JOIN dbo.AspNetRoles as r ON ur.RoleId = r.Id WHERE u.Id = @UserId";
                     cmd.Parameters.AddWithValue("UserId", UserId);
 
                     SqlDataReader reader = cmd.ExecuteReader();
@@ -33,8 +33,8 @@ namespace Presentation.Repositories
                         FoundUser.DisplayName = (reader["DisplayName"] == DBNull.Value ? string.Empty : reader["DisplayName"].ToString());
                         FoundUser.Email = (reader["Email"] == DBNull.Value ? string.Empty : reader["Email"].ToString());
                         FoundUser.Role = (reader["Name"] == DBNull.Value ? string.Empty : reader["Name"].ToString());
-                        //FoundUser.Area1 = (reader["Area1"] == DBNull.Value ? string.Empty : reader["Area1"].ToString());
-                        //FoundUser.Area2 = (reader["Area2"] == DBNull.Value ? string.Empty : reader["Area2"].ToString());
+                        FoundUser.Area1 = Convert.ToInt32((reader["Area1"] == DBNull.Value ? string.Empty : reader["Area1"]));
+                        FoundUser.Area2 = Convert.ToInt32((reader["Area2"] == DBNull.Value ? string.Empty : reader["Area2"]));
                     }
                 }
                 con.Close();
