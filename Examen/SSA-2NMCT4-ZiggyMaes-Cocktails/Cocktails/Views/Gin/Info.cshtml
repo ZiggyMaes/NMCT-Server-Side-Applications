@@ -1,0 +1,11 @@
+﻿@model Cocktails.Models.Gin
+
+@{
+    ViewBag.Title = "Info";
+
+}
+
+<img src="/Content/Images/@ViewBag.GinImageName" />
+<p>@Model.Description</p>
+@if (!User.Identity.IsAuthenticated) { <p><a href="/Account/Login">Log in</a> to view the cocktails</p> }
+else { <p><a href="/Gin/Order?GinId=@Model.ID">Click here</a> to view some cocktails</p> }

@@ -1,0 +1,17 @@
+﻿@model IEnumerable<Cocktails.Models.Cocktail>
+
+@{
+    ViewBag.Title = "OrderSuccess";
+}
+
+<h2>Thank you for your order</h2>
+<h3>Selected gin: @ViewBag.Gin.Name</h3>
+<h3>Selected cocktails:</h3>
+
+<ul>
+    @foreach (var cocktail in Model)
+    {
+        <li>@cocktail.Name</li>
+    }
+</ul>
+<a href="/Gin">Back to Gin List</a>

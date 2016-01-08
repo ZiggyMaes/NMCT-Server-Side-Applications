@@ -1,0 +1,16 @@
+﻿@model IEnumerable<Cocktails.Models.Gin>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Our best Gins</h2>
+<hr />
+
+<p>
+    @foreach (var g in Model)
+    {
+        <a href="Gin/Info?GinId=@g.ID">@g.Name - </a>;
+    }
+
+</p>

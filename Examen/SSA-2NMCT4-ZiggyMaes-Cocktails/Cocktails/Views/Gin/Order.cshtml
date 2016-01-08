@@ -1,0 +1,33 @@
+﻿@model IEnumerable<Cocktails.ViewModels.VMCocktail>
+
+@{
+    ViewBag.Title = "Order";
+}
+
+<h2>Following cocktails are served with <b><u>@ViewBag.Gin.Name</u></b> gin:</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <h3>Select your favorites and order them: <input type="submit" value="Order" class="btn btn-default" /></h3>   
+    <br />
+
+    <div class="form-horizontal">
+        @foreach (var cocktail in Model)
+        {
+            <input type="hidden" name="GinId" value="@ViewBag.Gin.ID" />
+            <input type="checkbox" name="SelectedCocktails[]" value="@cocktail.CurrentCocktail.ID" />
+            <label>@cocktail.CurrentCocktail.Name</label>
+            <ul>
+                @foreach (var i in cocktail.Ingredients)
+                {
+                    <li>@i.Name: @i.Quantity</li>
+                }
+            </ul>
+        }   
+    </div>
+}
+
+
+
+
